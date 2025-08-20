@@ -1,0 +1,153 @@
+// ==UserScript==
+// @name         TLS签证(小法国签证)
+// @namespace    http://tampermonkey.net/
+// @version      0.16
+// @description  TLS签证辅助，自动刷新，空位提示，红色区分
+// @author       Mrsir
+// @match        https://*.tlscontact.com/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=tlscontact.com
+// @grant        GM_addStyle
+// @supportURL   https://baidu.com
+// @license MIT
+// @downloadURL https://update.greasyfork.org/scripts/460237/TLS%E7%AD%BE%E8%AF%81%28%E5%B0%8F%E6%B3%95%E5%9B%BD%E7%AD%BE%E8%AF%81%29.user.js
+// @updateURL https://update.greasyfork.org/scripts/460237/TLS%E7%AD%BE%E8%AF%81%28%E5%B0%8F%E6%B3%95%E5%9B%BD%E7%AD%BE%E8%AF%81%29.meta.js
+// ==/UserScript==
+
+(function() {
+    'use strict';
+    console.log("破解全屏和下载完毕");
+
+    function play() {
+            var audio = new Audio('https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3');
+            audio.loop = true;
+            audio.play();
+        }
+
+    function sleep(ms)
+    {
+    return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    setTimeout(function() {
+        const a = document.getElementsByTagName('button');
+        let items = [];
+        let slots = [];
+        for (let i =0; i<a.length; i++) {
+            if(a[i] && a[i].getAttribute('data-testid') == 'btn-month-selector' && (a[i].textContent == 'September 2025' || a[i].textContent == 'September 2025' )){
+                items.push(a[i]);
+            }
+        }
+        if(items.length === 0 ) {
+          setTimeout(()=>{location.reload();},3000);
+        } else {
+            items[0].click();
+            setTimeout(function(){
+                const table = document.getElementsByTagName('button');
+                for (let i =0; i<table.length; i++) {
+                    if(table[i] && table[i].getAttribute('data-testid') == 'btn-add-appointment-slot' && !table[i].disabled){
+                        slots.push(table[i]);
+                        console.info(slots);
+                    }
+                }
+                if(slots.length > 0) {
+                    console.info("aaaa");
+                    play();
+                    clearTimeout(reloadNumb);
+                }
+            }, 10000)
+            
+            
+
+        
+        }   
+
+    }, 15000);
+
+    const reloadNumb = setTimeout(()=>{location.reload();},3 * 60 * 1000);
+
+
+
+    if (document.getElementsByClassName("form_status").length) {
+        GM_addStyle('a.appt-table-btn.full {background-color: red;}');
+        if (document.getElementsByClassName("appt-table-btn full").length < document.getElementsByClassName("appt-table-btn").length){
+            window.alert("Available slot appears!");
+            for (var c=0;c<3;c++)
+            {
+                setTimeout(()=>{play()},c*2000);
+            }
+
+        }
+        else{
+            var list1 = document.getElementsByClassName("appt-table-btn full");
+            //window.alert('Full slot number:'+parseInt(list1.length));
+            setTimeout(()=>{location.reload();},parseInt((Math.random()*(30-15)+15)*1000));
+        }
+        GM_addStyle('.container {max-width: fit-content !important;}');
+        GM_addStyle('div.take_appointment,div.card {height: 1600px !important; width: 3000px !important;}');
+
+    }
+
+})();
+
+
+
+<!-- 
+
+<button aria-label="2025年9月22日星期一 08:45, 标准预约, Premium lounge unavailable" disabled="" data-testid="btn-add-appointment-slot" class="appointment-hour group/hour appointment-hour_disabled">08:45 <div class="absolute end-2 pb-0.5"><!----></div></button>
+
+
+<button aria-label="2025年9月22日星期一 09:00, 标准预约, Premium lounge unavailable" data-testid="btn-add-appointment-slot" class="appointment-hour group/hour appointment-hour_default">09:00 <div class="absolute end-2 pb-0.5"><!----></div></button>
+
+<button aria-label="2025年9月20日星期六 08:30, 优选时段预约, Premium lounge unavailable" data-testid="btn-add-appointment-slot" class="appointment-hour group/hour appointment-hour_prime">08:30 <div class="absolute end-2 pb-0.5"><!----></div></button>
+
+
+ -->
+
+
+ {
+    "name": "zeus",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+      "@ant-design/charts": "^2.6.0",
+      "@testing-library/dom": "^10.4.0",
+      "@testing-library/jest-dom": "^6.6.3",
+      "@testing-library/react": "^16.3.0",
+      "@testing-library/user-event": "^13.5.0",
+      "antd": "^5.26.3",
+      "axios": "^1.11.0",
+      "mobx": "^6.13.7",
+      "mobx-react": "^9.2.0",
+      "mobx-react-router": "^6.1.0",
+      "react": "^19.1.0",
+      "react-dom": "^19.1.0",
+      "react-router-dom": "^6.30.1",
+      "react-scripts": "5.0.1",
+      "web-vitals": "^2.1.4"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    }
+  }
+  

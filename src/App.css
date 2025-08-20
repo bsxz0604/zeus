@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+/* my css */
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.header-wrapper .title {
+  color: white;
+}
+.header-wrapper .user-wrapper {
+  color: white;
+}
+

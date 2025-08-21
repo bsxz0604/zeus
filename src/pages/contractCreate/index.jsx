@@ -205,10 +205,13 @@ const ContractCreatedModal = (props) => {
             { 
               party_b_id: "1", 
               confirmation_method: '电子确认',
+              dispute_resolution_method: '(2)',
               filing_method: '(2)',
               filing_party: filingParty,
               original_copies: 2,
               duplicate_copies: 1,
+              submission_time: dayjs(),
+              confirmation_time: dayjs(),
               quotation: {
                 quote_type_id: quote, 
                 standard_curve_method: false, 
@@ -228,23 +231,23 @@ const ContractCreatedModal = (props) => {
             <Divider orientation="center" size='large'>合同基本信息</Divider>
 
             <Row justify="space-between" gutter={16}>
-              <Col span={12} ><Form.Item label="甲方合同编号" name="party_a_contract_no" ><Input /></Form.Item></Col>
-              <Col span={12} ><Form.Item label="乙方合同编号" name="party_b_contract_no" ><Input /></Form.Item></Col>
+              <Col span={12} ><Form.Item required label="甲方合同编号" name="party_a_contract_no" ><Input /></Form.Item></Col>
+              <Col span={12} ><Form.Item required label="乙方合同编号" name="party_b_contract_no" ><Input /></Form.Item></Col>
             </Row> 
 
             <Row justify="space-between" gutter={16}>
               <Col span={8} >
-                <Form.Item label="甲方签订日期" name="party_a_sign_date">
+                <Form.Item required label="甲方签订日期" name="party_a_sign_date">
                   <DatePicker style={{width:'100%'}} />
                 </Form.Item>
               </Col>
               <Col span={8} >
-                <Form.Item label="乙方签订日期" name="party_b_sign_date">
+                <Form.Item required label="乙方签订日期" name="party_b_sign_date">
                   <DatePicker style={{width:'100%'}} />
                 </Form.Item>
               </Col>
               <Col span={8} >
-                <Form.Item label="零售平台下单时间" name="order_time">
+                <Form.Item required label="零售平台下单时间" name="order_time">
                   <DatePicker style={{width:'100%'}} />
                 </Form.Item>
               </Col>
@@ -252,17 +255,17 @@ const ContractCreatedModal = (props) => {
 
             <Row justify="space-between" gutter={16}>
               <Col span={8} >
-                <Form.Item label="合同签订日期" name="contract_sign_date">
+                <Form.Item required label="合同签订日期" name="contract_sign_date">
                   <DatePicker style={{width:'100%'}} />
                 </Form.Item>
               </Col>
               <Col span={8} >
-                <Form.Item label="提交时间" name="submission_time">
+                <Form.Item required label="提交时间" name="submission_time">
                   <DatePicker style={{width:'100%'}} />
                 </Form.Item>
               </Col>
               <Col span={8} >
-                <Form.Item label="确认时间" name="confirmation_time">
+                <Form.Item required label="确认时间" name="confirmation_time">
                   <DatePicker style={{width:'100%'}} />
                 </Form.Item>
               </Col>
@@ -273,7 +276,7 @@ const ContractCreatedModal = (props) => {
 
             <Row justify="space-between" gutter={16}>
               <Col span={8} >
-                <Form.Item label="甲方主体名" name={['party_a_id']}>
+                <Form.Item required label="甲方主体名" name={['party_a_id']}>
                   <Select placeholder="选择已录入的客户信息">
                     {
                       customerList.map(cus => {
@@ -337,7 +340,7 @@ const ContractCreatedModal = (props) => {
           <>
             <Divider orientation="center" size='large'>套餐信息</Divider>
 
-            <Form.Item label="电价套餐" name={['quotation', 'quote_type_id']}>
+            <Form.Item required label="电价套餐" name={['quotation', 'quote_type_id']}>
               <Radio.Group>
                 <Radio.Button value={1}>绿电固定价格</Radio.Button>
                 <Radio.Button value={2}>比例分成</Radio.Button>

@@ -7,10 +7,13 @@ import { GetPartyAList, DeletePartyAInfo } from '../../request';
 
 import CustomerCreatedModal from '../customerCreate/index';
 
+import './index.css';
+
 const { Column } = Table;
 
 
 import axios from 'axios';
+import CustomerEditdModal from '../customerEdit';
 
 
 
@@ -39,7 +42,7 @@ const DoubleConfirmButton = (props) => {
  
   return (
     <>
-      <Button color="danger" variant="link" onClick={showFirstConfirm}>删除</Button>
+      <Button color="danger" variant="link" className='nopadding' onClick={showFirstConfirm}>删除</Button>
       <Modal
         title="确认删除"
         open={visible}
@@ -103,14 +106,14 @@ const Customer = () => {
         <Flex gap="middle" justify="space-between">
           <CustomerCreatedModal reload={reload} messageApi={messageApi}/>
           <Form form={form} layout="inline">
-            <Form.Item name="party_a_name" label="主体名称">
+            {/* <Form.Item name="party_a_name" label="主体名称">
               <Input placeholder=""/>
             </Form.Item>
             <Form.Item>
                 <Button type="primary" onClick={handleSubmit} loading={loading}>
                   搜索
                 </Button>
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Flex>
       </div>
@@ -136,6 +139,7 @@ const Customer = () => {
           render={(_, record) => (
               <Space size="middle">
                 <Link to={`${routerName.customer}/${record.party_a_id}`}>详情</Link>
+                <CustomerEditdModal id={record.party_a_id} reload={reload} messageApi={messageApi}/>
                 <DoubleConfirmButton id={record.party_a_id} reload={reload} messageApi={messageApi}/>
               </Space>
         )}

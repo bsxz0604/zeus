@@ -35,11 +35,11 @@ const contractItems = [
 const settlementItems = [
     {
         key: `settlement-upload`,
-        label: `结算单录入`,
+        label: <Link to='/c'>结算单录入</Link>,
     },
     {
         key: `settlement-list`,
-        label: `结算单查询`,
+        label: <Link to='/c'>结算单查询</Link>,
     },
 ];
 
@@ -47,7 +47,7 @@ const settlementItems = [
 const priceItems = [
     {
         key: `price-list`,
-        label: `电价管理`,
+        label: <Link to='/c'>电价管理</Link>,
     },
     {
         key: routerName.electric.predictPrice,
@@ -55,7 +55,7 @@ const priceItems = [
     },
     {
         key: `price-used-electric`,
-        label: `月用电量预测`,
+        label: <Link to='/c'>月用电量预测</Link>,
     }
 ];
 
@@ -87,7 +87,7 @@ export const routerItems =  [
     {
         key: `admin`,
         icon: <UsergroupAddOutlined />,
-        label: `用户管理`,
+        label: <Link to='/c'>用户管理</Link>,
     },
 ];
 

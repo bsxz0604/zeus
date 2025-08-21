@@ -19,8 +19,8 @@ export function GetPartyAInfo(id) {
     return service.get(`/api/v1/party-a/${id}`);
 }
 
-export function EditPartyAInfo(id) {
-    return service.put(`/api/v1/party-a/${id}`);
+export function EditPartyAInfo(id, data) {
+    return service.put(`/api/v1/party-a/${id}`, { ...data });
 }
 
 export function DeletePartyAInfo(id) {
@@ -32,6 +32,7 @@ export function ContractPDF(id) {
         responseType: 'blob',
     })
 }
+
 
 
 export function CreateContract(data) {
@@ -47,8 +48,10 @@ export function GetContractInfo(id) {
     return service.get(`/api/v1/contracts/${id}`);
 }
 
-export function EditContractInfo(id) {
-    return service.put(`/api/v1/contracts/${id}`);
+export function EditContractInfo(id,data) {
+    return service.put(`/api/v1/contracts/${id}`, {
+        ...data
+    });
 }
 
 export function DeleteContractInfo(id) {

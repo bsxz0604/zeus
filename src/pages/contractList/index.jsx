@@ -92,14 +92,14 @@ const ContractList = () => {
         <Flex gap="middle" justify="space-between">
           <ContractCreatedModal reload={reload} messageApi={messageApi}/>
           <Form form={form} layout="inline">
-            <Form.Item name="party_a_name" label="甲方主体名称">
+            {/* <Form.Item name="party_a_name" label="甲方主体名称">
               <Input placeholder="请输入工单号"/>
             </Form.Item>
             <Form.Item>
                 <Button type="primary" onClick={handleSubmit} loading={loading}>
                   搜索
                 </Button>
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Flex>
       </div>

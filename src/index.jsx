@@ -29,8 +29,7 @@ const router = createBrowserRouter(
         <Route path={routerName.contract.list} element={<ContractList />} />
         <Route path={`${routerName.contract.list}/:id`} element={<ContractDetail />} />
 
-        <Route path="a" element={<div>a</div>} />
-        <Route path="c" element={<div>c</div>} />
+        <Route path="c" element={<div>正在建设中...</div>} />
 
 
         <Route path={routerName.electric.predictPrice} element={<ElectricPredictPrice />} />

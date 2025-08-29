@@ -70,7 +70,7 @@ const ContractCreatedModal = (props) => {
 
 
   const handleOk = () => {
-    // setConfirmLoading(true);
+    setConfirmLoading(true);
     let submitInfo = form.getFieldsValue();
 
     let trade_start_time = form.getFieldValue('trade_time_form')[0].date(1);
@@ -312,15 +312,15 @@ const ContractCreatedModal = (props) => {
     
     console.info('==========111', req);
 
-    // CreateContract(req).then(() => {
-    //   props.messageApi.success("创建成功");
-    //   props.reload();
-    // }).catch(()=> {
-    //   props.messageApi.error("创建失败");
-    // }).finally(() => {
-    //   setOpen(false);
-    //   setConfirmLoading(false);
-    // });
+    CreateContract(req).then(() => {
+      props.messageApi.success("创建成功");
+      props.reload();
+    }).catch(()=> {
+      props.messageApi.error("创建失败");
+    }).finally(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    });
   };
 
   const handleCancel = () => {

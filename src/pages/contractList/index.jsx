@@ -186,7 +186,7 @@ const ContractList = () => {
               <Space size="middle">
                 <Button color="default" variant="link" className='nopadding' onClick={() => downloadContractWord(record.contract_id)}>生成合同</Button>
                 <Link to={`${routerName.contract.list}/${record.contract_id}`}>详情</Link>
-                <ContractEditModal id={record.contract_id} reload={reload} messageApi={messageApi}/>
+                {/* <ContractEditModal id={record.contract_id} reload={reload} messageApi={messageApi}/> */}
                 <DoubleConfirmButton id={record.contract_id} reload={reload} messageApi={messageApi}/>
               </Space>
         )}

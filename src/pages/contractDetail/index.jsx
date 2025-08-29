@@ -175,14 +175,13 @@ const ContractDetail = () => {
       label: '绿电价格',
       children: info.contract_content?.quote_details?.green_electricity_price|| '/',
     },
-
     {
       label: '合计电量',
       children: info.contract_content?.quotation_info?.total_electricity,
     },
     {
       label: '用电量正负偏差',
-      children: `${info.contract_content?.quotation_info?.electricity_deviation}%`,
+      children: info.contract_content?.quotation_info?.electricity_deviation ? `${info.contract_content?.quotation_info?.electricity_deviation}%` : '/',
     },
     {
       label: '是否约定执行标准用电曲线',
@@ -191,19 +190,19 @@ const ContractDetail = () => {
 
     {
       label: '用电量超出正偏差比例',
-      children: `${info.contract_content?.quotation_info?.positive_deviation_ratio}%`
+      children: info.contract_content?.quotation_info?.positive_deviation_ratio ? `${info.contract_content?.quotation_info?.positive_deviation_ratio}%`: '/',
     },
     {
       label: '用电量正偏差外价格',
-      children: `¥${info.contract_content?.quotation_info?.positive_deviation_price}`
+      children: info.contract_content?.quotation_info?.positive_deviation_price ? `¥${info.contract_content?.quotation_info?.positive_deviation_price}` : '/',
     },
     {
       label: '用电量超出负偏差比例',
-      children: `${info.contract_content?.quotation_info?.negative_deviation_ratio}%`,
+      children: info.contract_content?.quotation_info?.negative_deviation_ratio ? `${info.contract_content?.quotation_info?.negative_deviation_ratio}%` : '/',
     },
     {
       label: '用电量负偏差外价格',
-      children: `¥${info.contract_content?.quotation_info?.negative_deviation_price}`,
+      children: info.contract_content?.quotation_info?.negative_deviation_price ? `¥${info.contract_content?.quotation_info?.negative_deviation_price}` : '/',
     }
   ];
 

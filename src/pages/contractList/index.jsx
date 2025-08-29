@@ -1,13 +1,57 @@
 import React, { useState, useEffect } from 'react';
 
-import { Space, Table, Tag, Input, Form, Button, message, Flex } from 'antd';
+import { Space, Table, Tag, Modal, Form, Button, message, Flex } from 'antd';
 import { Link } from 'react-router-dom';
 import { routerName } from '../../router';
 
 import ContractCreatedModal from '../contractCreate/index';
-import { ContractPDF, GetContractList } from '../../request';
+import { ContractPDF, DeleteContractInfo, GetContractList } from '../../request';
+import ContractEditModal from '../contractEdit';
 
 const { Column, ColumnGroup } = Table;
+
+import './index.css'
+
+
+
+const DoubleConfirmButton = (props) => {
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+ 
+  const showFirstConfirm = () => {
+    setVisible(true);
+  };
+ 
+  const handleFirstConfirmCancel = () => {
+    setVisible(false);
+  };
+ 
+  const handleFirstConfirmOk = () => {
+    setVisible(false);
+    setConfirmLoading(true);
+    DeleteContractInfo(props.id).then(() => {
+      setConfirmLoading(false);
+      setVisible(false); // 关闭第二次确认对话框
+      props.messageApi.success("删除成功")
+      props.reload();
+    })
+  };
+ 
+  return (
+    <>
+      <Button color="danger" variant="link" className='nopadding' onClick={showFirstConfirm}>删除</Button>
+      <Modal
+        title="确认删除"
+        open={visible}
+        onOk={handleFirstConfirmOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleFirstConfirmCancel}
+      >
+        <p>您确定要删除这项内容吗？</p>
+      </Modal>
+    </>
+  );
+};
 
 
 
@@ -60,7 +104,7 @@ const ContractList = () => {
 
 
   const getElectricityQuoteTagColor = (id) => {
-    if(id == "绿电固定价格") {
+    if(id == "固定价格") {
       return '#87d068';
     } 
     if(id == "比例分成") {
@@ -140,9 +184,10 @@ const ContractList = () => {
           fixed='right'
           render={(_, record) => (
               <Space size="middle">
+                <Button color="default" variant="link" className='nopadding' onClick={() => downloadContractWord(record.contract_id)}>生成合同</Button>
                 <Link to={`${routerName.contract.list}/${record.contract_id}`}>详情</Link>
-                <Button color="danger" variant="link" onClick={() => downloadContractWord(record.contract_id)}>生成合同</Button>
-                {/* <Button color="danger" variant="link" >报价单生成</Button> */}
+                <ContractEditModal id={record.contract_id} reload={reload} messageApi={messageApi}/>
+                <DoubleConfirmButton id={record.contract_id} reload={reload} messageApi={messageApi}/>
               </Space>
         )}
         />

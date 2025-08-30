@@ -26,7 +26,8 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "build1": "node --max-old-space-size=2048 node_modules/.bin/vite build"
   },
   "eslintConfig": {
     "extends": [

@@ -52,6 +52,40 @@ const ContractDetail = () => {
     }
   ];
 
+
+
+  const customPartyAInfo = [
+     {
+      label: '甲方主体名称',
+      children: info.contract_content?.party_a_custom_company || '/',
+    },
+    {
+      label: '甲方统一社会信用代码',
+      children: info.contract_content?.party_a_custom_credit_code || '/',
+    },
+    {
+      label: '甲方经办人姓名',
+      children: info.contract_content?.party_a_custom_contact_person|| '/',
+    },
+    {
+      label: '甲方法人',
+      children: info.contract_content?.party_a_custom_legal_person|| '/',
+    },
+    {
+      label: '甲方公司住所',
+      children: info.contract_content?.party_a_custom_address || '/',
+    },
+    {
+      label: '甲方开户银行',
+      children: info.contract_content?.party_a_custom_bank || '/',
+    },
+    {
+      label: '甲方开户账号',
+      children: info.contract_content?.party_a_custom_bank_account || '/',
+    }
+  ];
+
+
   const partyAInfo = [
     {
       label: '甲方主体名称',
@@ -481,9 +515,9 @@ const ContractDetail = () => {
     />
 
     <Descriptions
-      title="甲方详细信息"
+      title={info.contract_content?.party_a_custom ? "甲方详细信息(临时)" :"甲方详细信息"}
       bordered
-      items={partyAInfo}
+      items={info.contract_content?.party_a_custom ? customPartyAInfo : partyAInfo}
       style={{paddingTop:24}}
     />
 

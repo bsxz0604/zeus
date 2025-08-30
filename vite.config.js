@@ -12,7 +12,7 @@ export default defineConfig(() => {
         },
     },
     build: {
-      outDir: 'build',
+      outDir: 'build-test',
     },
     loader: { '.js': 'jsx' },
     plugins: [

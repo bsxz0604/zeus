@@ -112,7 +112,7 @@ const ContractCreatedModal = (props) => {
     // 甲方的处理
     if(choosedPartyAId == noChoosedPartyA) {
       req.party_a_custom = true;
-      req.party_a_id =  -1,
+      // req.party_a_id =  -1,
       req.party_a_custom_company = partyACustomname;
       // req.party_a_custom_credit_code = '';
       // req.party_a_custom_legal_person = '';
@@ -129,28 +129,28 @@ const ContractCreatedModal = (props) => {
 
     // 处理套餐
     {
-      isValidNumber(req.quotation.green_elec_price) ? Number(req.quotation.green_elec_price) : null;
+      req.quotation.green_elec_price = isValidNumber(req.quotation.green_elec_price) ? Number(req.quotation.green_elec_price) : null;
 
-      isValidNumber(req.quotation.electricity_deviation) ? Number(req.quotation.electricity_deviation) : null;
-      isValidNumber(req.quotation.positive_deviation_ratio) ? Number(req.quotation.positive_deviation_ratio) : null;
-      isValidNumber(req.quotation.positive_deviation_price) ? Number(req.quotation.positive_deviation_price) : null;
-      isValidNumber(req.quotation.negative_deviation_ratio) ? Number(req.quotation.negative_deviation_ratio) : null;
-      isValidNumber(req.quotation.negative_deviation_price) ? Number(req.quotation.negative_deviation_price) : null;
+      req.quotation.electricity_deviation = isValidNumber(req.quotation.electricity_deviation) ? Number(req.quotation.electricity_deviation) : null;
+      req.quotation.positive_deviation_ratio = isValidNumber(req.quotation.positive_deviation_ratio) ? Number(req.quotation.positive_deviation_ratio) : null;
+      req.quotation.positive_deviation_price = isValidNumber(req.quotation.positive_deviation_price) ? Number(req.quotation.positive_deviation_price) : null;
+      req.quotation.negative_deviation_ratio = isValidNumber(req.quotation.negative_deviation_ratio) ? Number(req.quotation.negative_deviation_ratio) : null;
+      req.quotation.negative_deviation_price = isValidNumber(req.quotation.negative_deviation_price) ? Number(req.quotation.negative_deviation_price) : null;
 
-      isValidNumber(req.quotation.curve_modify_days) ? Number(req.quotation.curve_modify_days) : null;
-      isValidNumber(req.quotation.curve_deviation) ? Number(req.quotation.curve_deviation) : null;
-      isValidNumber(req.quotation.curve_positive_ratio) ? Number(req.quotation.curve_positive_ratio) : null;
-      isValidNumber(req.quotation.curve_positive_price) ? Number(req.quotation.curve_positive_price) : null;
-      isValidNumber(req.quotation.curve_negative_ratio) ? Number(req.quotation.curve_negative_ratio) : null;
-      isValidNumber(req.quotation.curve_negative_price) ? Number(req.quotation.curve_negative_price) : null;
+      req.quotation.curve_modify_days = isValidNumber(req.quotation.curve_modify_days) ? Number(req.quotation.curve_modify_days) : null;
+      req.quotation.curve_deviation = isValidNumber(req.quotation.curve_deviation) ? Number(req.quotation.curve_deviation) : null;
+      req.quotation.curve_positive_ratio = isValidNumber(req.quotation.curve_positive_ratio) ? Number(req.quotation.curve_positive_ratio) : null;
+      req.quotation.curve_positive_price = isValidNumber(req.quotation.curve_positive_price) ? Number(req.quotation.curve_positive_price) : null;
+      req.quotation.curve_negative_ratio = isValidNumber(req.quotation.curve_negative_ratio) ? Number(req.quotation.curve_negative_ratio) : null;
+     req.quotation.curve_negative_price = isValidNumber(req.quotation.curve_negative_price) ? Number(req.quotation.curve_negative_price) : null;
 
     }
     // 处理套餐detail 
     if(quote == 1) {
 
-      isValidNumber(req.quotation.quote_details.fixed_price_ratio) ? Number(req.quotation.quote_details.fixed_price_ratio) : null;
-      isValidNumber(req.quotation.quote_details.market_transaction_price) ? Number(req.quotation.quote_details.market_transaction_price) : null;
-      isValidNumber(req.quotation.quote_details.price_limit) ? Number(req.quotation.quote_details.price_limit) : null;
+      req.quotation.quote_details.fixed_price_ratio = isValidNumber(req.quotation.quote_details.fixed_price_ratio) ? Number(req.quotation.quote_details.fixed_price_ratio) : null;
+      req.quotation.quote_details.market_transaction_price = isValidNumber(req.quotation.quote_details.market_transaction_price) ? Number(req.quotation.quote_details.market_transaction_price) : null;
+      req.quotation.quote_details.price_limit = isValidNumber(req.quotation.quote_details.price_limit) ? Number(req.quotation.quote_details.price_limit) : null;
 
       delete(req.quotation.quote_details.ps_prop_sharing_ratio);
       delete(req.quotation.quote_details.ps_dist_ref_price);
@@ -200,32 +200,32 @@ const ContractCreatedModal = (props) => {
       delete(req.quotation.quote_details.market_transaction_price);
       delete(req.quotation.quote_details.price_limit);
 
-      isValidNumber(req.quotation.quote_details.ps_prop_sharing_ratio) ? Number(req.quotation.quote_details.ps_prop_sharing_ratio) : null;
-      isValidNumber(req.quotation.quote_details.ps_dist_ref_price) ? Number(req.quotation.quote_details.ps_dist_ref_price) : null;
-      isValidNumber(req.quotation.quote_details.ps_long_term_trans_ratio) ? Number(req.quotation.quote_details.ps_long_term_trans_ratio) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_long_term) ? Number(req.quotation.quote_details.ps_party_a_prop_below_long_term) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_long_term) ? Number(req.quotation.quote_details.ps_party_b_prop_below_long_term) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_long_term) ? Number(req.quotation.quote_details.ps_party_a_prop_above_long_term) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_long_term) ? Number(req.quotation.quote_details.ps_party_b_prop_above_long_term) : null;
-      isValidNumber(req.quotation.quote_details.ps_monthly_bid_ratio) ? Number(req.quotation.quote_details.ps_monthly_bid_ratio) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_monthly_bid) ? Number(req.quotation.quote_details.ps_party_a_prop_below_monthly_bid) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_monthly_bid) ? Number(req.quotation.quote_details.ps_party_b_prop_below_monthly_bid) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_monthly_bid) ? Number(req.quotation.quote_details.ps_party_a_prop_above_monthly_bid) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_monthly_bid) ? Number(req.quotation.quote_details.ps_party_b_prop_above_monthly_bid) : null;
-      isValidNumber(req.quotation.quote_details.ps_agent_proc_ratio) ? Number(req.quotation.quote_details.ps_agent_proc_ratio) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_agent_proc) ? Number(req.quotation.quote_details.ps_party_a_prop_below_agent_proc) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_agent_proc) ? Number(req.quotation.quote_details.ps_party_b_prop_below_agent_proc) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_agent_proc) ? Number(req.quotation.quote_details.ps_party_a_prop_above_agent_proc) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_agent_proc) ? Number(req.quotation.quote_details.ps_party_b_prop_above_agent_proc) : null;
-      isValidNumber(req.quotation.quote_details.ps_intra_month_ratio) ? Number(req.quotation.quote_details.ps_intra_month_ratio) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_intra_month) ? Number(req.quotation.quote_details.ps_party_a_prop_below_intra_month) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_intra_month) ? Number(req.quotation.quote_details.ps_party_b_prop_below_intra_month) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_intra_month) ? Number(req.quotation.quote_details.ps_party_a_prop_above_intra_month) : null;
-      isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_intra_month) ? Number(req.quotation.quote_details.ps_party_b_prop_above_intra_month) : null;
-      isValidNumber(req.quotation.quote_details.ps_long_term_trans_limit) ? Number(req.quotation.quote_details.ps_long_term_trans_limit) : null;
-      isValidNumber(req.quotation.quote_details.ps_monthly_bid_limit) ? Number(req.quotation.quote_details.ps_monthly_bid_limit) : null;
-      isValidNumber(req.quotation.quote_details.ps_agent_proc_limit) ? Number(req.quotation.quote_details.ps_agent_proc_limit) : null;
-      isValidNumber(req.quotation.quote_details.ps_intra_month_limit) ? Number(req.quotation.quote_details.ps_intra_month_limit) : null;
+      req.quotation.quote_details.ps_prop_sharing_ratio = isValidNumber(req.quotation.quote_details.ps_prop_sharing_ratio) ? Number(req.quotation.quote_details.ps_prop_sharing_ratio) : null;
+      req.quotation.quote_details.ps_dist_ref_price = isValidNumber(req.quotation.quote_details.ps_dist_ref_price) ? Number(req.quotation.quote_details.ps_dist_ref_price) : null;
+      req.quotation.quote_details.ps_long_term_trans_ratio = isValidNumber(req.quotation.quote_details.ps_long_term_trans_ratio) ? Number(req.quotation.quote_details.ps_long_term_trans_ratio) : null;
+      req.quotation.quote_details.ps_party_a_prop_below_long_term = isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_long_term) ? Number(req.quotation.quote_details.ps_party_a_prop_below_long_term) : null;
+      req.quotation.quote_details.ps_party_b_prop_below_long_term = isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_long_term) ? Number(req.quotation.quote_details.ps_party_b_prop_below_long_term) : null;
+      req.quotation.quote_details.ps_party_a_prop_above_long_term = isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_long_term) ? Number(req.quotation.quote_details.ps_party_a_prop_above_long_term) : null;
+      req.quotation.quote_details.ps_party_b_prop_above_long_term = isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_long_term) ? Number(req.quotation.quote_details.ps_party_b_prop_above_long_term) : null;
+      req.quotation.quote_details.ps_monthly_bid_ratio = isValidNumber(req.quotation.quote_details.ps_monthly_bid_ratio) ? Number(req.quotation.quote_details.ps_monthly_bid_ratio) : null;
+      req.quotation.quote_details.ps_party_a_prop_below_monthly_bid = isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_monthly_bid) ? Number(req.quotation.quote_details.ps_party_a_prop_below_monthly_bid) : null;
+      req.quotation.quote_details.ps_party_b_prop_below_monthly_bid = isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_monthly_bid) ? Number(req.quotation.quote_details.ps_party_b_prop_below_monthly_bid) : null;
+      req.quotation.quote_details.ps_party_a_prop_above_monthly_bid = isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_monthly_bid) ? Number(req.quotation.quote_details.ps_party_a_prop_above_monthly_bid) : null;
+      req.quotation.quote_details.ps_party_b_prop_above_monthly_bid = isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_monthly_bid) ? Number(req.quotation.quote_details.ps_party_b_prop_above_monthly_bid) : null;
+      req.quotation.quote_details.ps_agent_proc_ratio = isValidNumber(req.quotation.quote_details.ps_agent_proc_ratio) ? Number(req.quotation.quote_details.ps_agent_proc_ratio) : null;
+      req.quotation.quote_details.ps_party_a_prop_below_agent_proc = isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_agent_proc) ? Number(req.quotation.quote_details.ps_party_a_prop_below_agent_proc) : null;
+      req.quotation.quote_details.ps_party_b_prop_below_agent_proc = isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_agent_proc) ? Number(req.quotation.quote_details.ps_party_b_prop_below_agent_proc) : null;
+      req.quotation.quote_details.ps_party_a_prop_above_agent_proc = isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_agent_proc) ? Number(req.quotation.quote_details.ps_party_a_prop_above_agent_proc) : null;
+      req.quotation.quote_details.ps_party_b_prop_above_agent_proc = isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_agent_proc) ? Number(req.quotation.quote_details.ps_party_b_prop_above_agent_proc) : null;
+      req.quotation.quote_details.ps_intra_month_ratio = isValidNumber(req.quotation.quote_details.ps_intra_month_ratio) ? Number(req.quotation.quote_details.ps_intra_month_ratio) : null;
+      req.quotation.quote_details.ps_party_a_prop_below_intra_month = isValidNumber(req.quotation.quote_details.ps_party_a_prop_below_intra_month) ? Number(req.quotation.quote_details.ps_party_a_prop_below_intra_month) : null;
+      req.quotation.quote_details.ps_party_b_prop_below_intra_month = isValidNumber(req.quotation.quote_details.ps_party_b_prop_below_intra_month) ? Number(req.quotation.quote_details.ps_party_b_prop_below_intra_month) : null;
+      req.quotation.quote_details.ps_party_a_prop_above_intra_month = isValidNumber(req.quotation.quote_details.ps_party_a_prop_above_intra_month) ? Number(req.quotation.quote_details.ps_party_a_prop_above_intra_month) : null;
+      req.quotation.quote_details.ps_party_b_prop_above_intra_month = isValidNumber(req.quotation.quote_details.ps_party_b_prop_above_intra_month) ? Number(req.quotation.quote_details.ps_party_b_prop_above_intra_month) : null;
+      req.quotation.quote_details.ps_long_term_trans_limit = isValidNumber(req.quotation.quote_details.ps_long_term_trans_limit) ? Number(req.quotation.quote_details.ps_long_term_trans_limit) : null;
+      req.quotation.quote_details.ps_monthly_bid_limit = isValidNumber(req.quotation.quote_details.ps_monthly_bid_limit) ? Number(req.quotation.quote_details.ps_monthly_bid_limit) : null;
+      req.quotation.quote_details.ps_agent_proc_limit = isValidNumber(req.quotation.quote_details.ps_agent_proc_limit) ? Number(req.quotation.quote_details.ps_agent_proc_limit) : null;
+      req.quotation.quote_details.ps_intra_month_limit = isValidNumber(req.quotation.quote_details.ps_intra_month_limit) ? Number(req.quotation.quote_details.ps_intra_month_limit) : null;
       
       delete(req.quotation.quote_details.pd_intra_month_ratio);
       delete(req.quotation.quote_details.pd_intra_month_avg_price);
@@ -275,30 +275,30 @@ const ContractCreatedModal = (props) => {
       delete(req.quotation.quote_details.ps_agent_proc_limit);
       delete(req.quotation.quote_details.ps_intra_month_limit);
 
-      isValidNumber(req.quotation.quote_details.pd_intra_month_ratio) ? Number(req.quotation.quote_details.pd_intra_month_ratio) : null;
-      isValidNumber(req.quotation.quote_details.pd_intra_month_avg_price) ? Number(req.quotation.quote_details.pd_intra_month_avg_price) : null;
-      isValidNumber(req.quotation.quote_details.pd_monthly_bid_limit) ? Number(req.quotation.quote_details.pd_monthly_bid_limit) : null;
-      isValidNumber(req.quotation.quote_details.pd_agent_proc_limit) ? Number(req.quotation.quote_details.pd_agent_proc_limit) : null;
-      isValidNumber(req.quotation.quote_details.pd_intra_month_limit) ? Number(req.quotation.quote_details.pd_intra_month_limit) : null;
-      isValidNumber(req.quotation.quote_details.pd_price_diff_fluc_ratio) ? Number(req.quotation.quote_details.pd_price_diff_fluc_ratio) : null;
-      isValidNumber(req.quotation.quote_details.pd_long_term_trans_ratio) ? Number(req.quotation.quote_details.pd_long_term_trans_ratio) : null;
-      isValidNumber(req.quotation.quote_details.pd_long_term_trans_avg_price) ? Number(req.quotation.quote_details.pd_long_term_trans_avg_price) : null;
-      isValidNumber(req.quotation.quote_details.pd_long_term_trans_limit) ? Number(req.quotation.quote_details.pd_long_term_trans_limit) : null;
-      isValidNumber(req.quotation.quote_details.pd_monthly_bid_ratio) ? Number(req.quotation.quote_details.pd_monthly_bid_ratio) : null;
-      isValidNumber(req.quotation.quote_details.pd_monthly_bid_clear_price) ? Number(req.quotation.quote_details.pd_monthly_bid_clear_price) : null;
-      isValidNumber(req.quotation.quote_details.pd_agent_proc_ratio) ? Number(req.quotation.quote_details.pd_agent_proc_ratio) : null;
-      isValidNumber(req.quotation.quote_details.pd_agent_avg_price) ? Number(req.quotation.quote_details.pd_agent_avg_price) : null;
+      req.quotation.quote_details.pd_intra_month_ratio = isValidNumber(req.quotation.quote_details.pd_intra_month_ratio) ? Number(req.quotation.quote_details.pd_intra_month_ratio) : null;
+      req.quotation.quote_details.pd_intra_month_avg_price = isValidNumber(req.quotation.quote_details.pd_intra_month_avg_price) ? Number(req.quotation.quote_details.pd_intra_month_avg_price) : null;
+      req.quotation.quote_details.pd_monthly_bid_limit = isValidNumber(req.quotation.quote_details.pd_monthly_bid_limit) ? Number(req.quotation.quote_details.pd_monthly_bid_limit) : null;
+      req.quotation.quote_details.pd_agent_proc_limit = isValidNumber(req.quotation.quote_details.pd_agent_proc_limit) ? Number(req.quotation.quote_details.pd_agent_proc_limit) : null;
+      req.quotation.quote_details.pd_intra_month_limit = isValidNumber(req.quotation.quote_details.pd_intra_month_limit) ? Number(req.quotation.quote_details.pd_intra_month_limit) : null;
+      req.quotation.quote_details.pd_price_diff_fluc_ratio = isValidNumber(req.quotation.quote_details.pd_price_diff_fluc_ratio) ? Number(req.quotation.quote_details.pd_price_diff_fluc_ratio) : null;
+      req.quotation.quote_details.pd_long_term_trans_ratio = isValidNumber(req.quotation.quote_details.pd_long_term_trans_ratio) ? Number(req.quotation.quote_details.pd_long_term_trans_ratio) : null;
+      req.quotation.quote_details.pd_long_term_trans_avg_price = isValidNumber(req.quotation.quote_details.pd_long_term_trans_avg_price) ? Number(req.quotation.quote_details.pd_long_term_trans_avg_price) : null;
+      req.quotation.quote_details.pd_long_term_trans_limit = isValidNumber(req.quotation.quote_details.pd_long_term_trans_limit) ? Number(req.quotation.quote_details.pd_long_term_trans_limit) : null;
+      req.quotation.quote_details.pd_monthly_bid_ratio = isValidNumber(req.quotation.quote_details.pd_monthly_bid_ratio) ? Number(req.quotation.quote_details.pd_monthly_bid_ratio) : null;
+      req.quotation.quote_details.pd_monthly_bid_clear_price = isValidNumber(req.quotation.quote_details.pd_monthly_bid_clear_price) ? Number(req.quotation.quote_details.pd_monthly_bid_clear_price) : null;
+      req.quotation.quote_details.pd_agent_proc_ratio = isValidNumber(req.quotation.quote_details.pd_agent_proc_ratio) ? Number(req.quotation.quote_details.pd_agent_proc_ratio) : null;
+      req.quotation.quote_details.pd_agent_avg_price = isValidNumber(req.quotation.quote_details.pd_agent_avg_price) ? Number(req.quotation.quote_details.pd_agent_avg_price) : null;
 
     }
 
     // 补充信息
     {
-      isValidNumber(req.party_b_termination_before30) ? Number(req.party_b_termination_before30) : null;
-      isValidNumber(req.party_b_termination_other) ? Number(req.party_b_termination_other) : null;
-      isValidNumber(req.party_b_termination_active) ? Number(req.party_b_termination_active) : null;
-      isValidNumber(req.party_a_termination_before30) ? Number(req.party_a_termination_before30) : null;
-      isValidNumber(req.party_a_termination_in30) ? Number(req.party_a_termination_in30) : null;
-      isValidNumber(req.party_a_termination_active) ? Number(req.party_a_termination_active) : null;
+      req.party_b_termination_before30 = isValidNumber(req.party_b_termination_before30) ? Number(req.party_b_termination_before30) : null;
+      req.party_b_termination_other = isValidNumber(req.party_b_termination_other) ? Number(req.party_b_termination_other) : null;
+      req.party_b_termination_active = isValidNumber(req.party_b_termination_active) ? Number(req.party_b_termination_active) : null;
+      req.party_a_termination_before30 = isValidNumber(req.party_a_termination_before30) ? Number(req.party_a_termination_before30) : null;
+      req.party_a_termination_in30 = isValidNumber(req.party_a_termination_in30) ? Number(req.party_a_termination_in30) : null;
+      req.party_a_termination_active = isValidNumber(req.party_a_termination_active) ? Number(req.party_a_termination_active) : null;
     }
 
     // 处理备案方式 逻辑

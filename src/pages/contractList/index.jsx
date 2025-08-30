@@ -156,9 +156,48 @@ const ContractList = () => {
       >
         {/* <Column title="工单号" dataIndex="id" key="id" fixed='left'/> */}
         <ColumnGroup title="甲方信息">
-          <Column title="主体名称" dataIndex={['party_a_company_name']} />
-          <Column title="经办人姓名" minWidth={95} dataIndex={['party_a_contact_person']} />
-          <Column title="经办人电话" dataIndex={['party_a_contact_phone']} />
+          <Column 
+            title="主体名称" 
+            dataIndex={['party_a_company_name']} 
+            render={(_, record) => (
+              // record.party_a_company_name?
+              <>
+                {record.party_a_company_name || '/'}
+              </>
+              // : 
+              // <>
+              //   {record.party_a_company_name}
+              // </>
+            )}
+          />
+          <Column 
+            title="经办人姓名" 
+            minWidth={95} 
+            dataIndex={['party_a_contact_person']} 
+            render={(_, record) => (
+              // record.party_a_contact_person?
+              <>
+                {record.party_a_contact_person || '/'}
+              </>
+              // : 
+              // <>
+                // {record.party_a_contact_person}
+              // </>
+            )}
+          />
+          <Column 
+            title="经办人电话" 
+            render={(_, record) => (
+              // record.party_a_contact_person?
+              <>
+                {record.party_a_contact_person || '/'}
+              </>
+              // : 
+              // <>
+                // {record.party_a_contact_person}
+              // </>
+            )}
+          />
         </ColumnGroup>
 
         <ColumnGroup title="合同信息">

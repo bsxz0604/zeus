@@ -775,7 +775,10 @@ const ContractCreatedModal = (props) => {
               </Col>
               <Col span={6} style={{display: (filingMethod == '(2)' ? 'block': 'none')}}>
                 <Form.Item label="备案方" name={['filing_party']}>
-                  <Input />
+                  <Select placeholder="选择备案方">
+                    <Option value={"甲"}>甲</Option>
+                    <Option value={"乙"}>乙</Option>
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>

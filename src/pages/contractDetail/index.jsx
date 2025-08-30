@@ -500,7 +500,7 @@ const ContractDetail = () => {
       children: info.contract_content?.filing_method  == '(1)' ? 
         "1. 甲方与乙方共同办理本合同在交易中心的备案及其他相关执行手续。"
         :  info.contract_content?.filing_method  == '(2)' ?
-          `2. 由 ${info.contract_content?.filingParty || 'X'} 方代为办理本合同在交易中心的备案和相关执行手续。`
+          `2. 由 ${info.contract_content?.filing_party || 'X'} 方代为办理本合同在交易中心的备案和相关执行手续。`
           :'/',
     },
 

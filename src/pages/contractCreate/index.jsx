@@ -357,7 +357,6 @@ const ContractCreatedModal = (props) => {
     if(info.filing_party && info.filing_party != filingParty)  {
       setFilingParty(info.filing_party);
     }
-
   };
 
   return (

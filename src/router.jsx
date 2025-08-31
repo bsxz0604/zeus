@@ -13,35 +13,35 @@ export const routerName = {
 }
 
 
-const contractItems = [
-    {
-        key: routerName.contract.list,
-        label: <Link to={routerName.contract.list} >合同查询</Link>,
-    },
-    // {
-    //     key: routerName.contract.upload,
-    //     label: <Link to='/a'>合同录入</Link>,
-    // },
-    {
-        key: `contract-quotation-create`,
-        label: <Link to='/c'>报价单生成</Link>,
-    },
-    // {
-    //     key: `contract-create`,
-    //     label: `合同生成`,
-    // }
-];
+// const contractItems = [
+//     {
+//         key: routerName.contract.list,
+//         label: <Link to={routerName.contract.list} >合同查询</Link>,
+//     },
+//     // {
+//     //     key: routerName.contract.upload,
+//     //     label: <Link to='/a'>合同录入</Link>,
+//     // },
+//     {
+//         key: `contract-quotation-create`,
+//         label: <Link to='/c'>报价单生成</Link>,
+//     },
+//     // {
+//     //     key: `contract-create`,
+//     //     label: `合同生成`,
+//     // }
+// ];
 
-const settlementItems = [
-    {
-        key: `settlement-upload`,
-        label: <Link to='/c'>结算单录入</Link>,
-    },
-    {
-        key: `settlement-list`,
-        label: <Link to='/c'>结算单查询</Link>,
-    },
-];
+// const settlementItems = [
+//     {
+//         key: `settlement-upload`,
+//         label: <Link to='/c'>结算单录入</Link>,
+//     },
+//     {
+//         key: `settlement-list`,
+//         label: <Link to='/c'>结算单查询</Link>,
+//     },
+// ];
 
 
 const priceItems = [
@@ -62,17 +62,16 @@ const priceItems = [
 
 export const routerItems =  [
     {
-        key: `contract`,
+        key: routerName.contract.list,
         icon: <FileOutlined />,
-        label: `合同管理`,
-        children: contractItems,
+        label: <Link to={routerName.contract.list} >合同管理</Link>,
     },
-    {
-        key: `settlement`,
-        icon: <SolutionOutlined />,
-        label: `结算单模块`,
-        children: settlementItems,
-    },
+    // {
+    //     key: `settlement`,
+    //     icon: <SolutionOutlined />,
+    //     label: `结算单模块`,
+    //     children: settlementItems,
+    // },
     {
         key: `price`,
         icon: <TransactionOutlined />,

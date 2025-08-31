@@ -105,7 +105,7 @@ const ContractList = () => {
 
   const getElectricityQuoteTagColor = (id) => {
     if(id == "固定价格") {
-      return '#87d068';
+      return '#f50';
     } 
     if(id == "比例分成") {
       return '#108ee9';
@@ -113,7 +113,7 @@ const ContractList = () => {
     if(id == "价差浮动") {
       return '#2db7f5';
     } 
-    return '#87d068';
+    return '#f50';
   }
 
 
@@ -213,10 +213,15 @@ const ContractList = () => {
           title="套餐类型"
           render={(_, record) => {
             return (
-              <Tag color={getElectricityQuoteTagColor(record.quote_type)}> {record.quote_type}</Tag>
+              <>
+                <Tag color={getElectricityQuoteTagColor(record.quote_type)}> {record.quote_type}</Tag>
+                {record.green_elec_allow ? <Tag color={'#87d068'}>绿电</Tag> : null}
+              </>
+              
             )
           }}
           />
+        
         <Column
           title="Action"
           key="action"

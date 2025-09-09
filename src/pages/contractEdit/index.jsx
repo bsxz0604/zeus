@@ -172,10 +172,10 @@ const ContractEditModal = (props) => {
           }
         })
 
-        setPdLongTermTransRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_long_term_trans_direction || true);
-        setPdMonthlyBidRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_monthly_bid_direction || true);
-        setPdAgentProcRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_agent_direction || true);
-        setPdIntraMonthRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_intra_month_direction || true);
+        setPdLongTermTransRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_long_term_trans_direction && true);
+        setPdMonthlyBidRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_monthly_bid_direction && true);
+        setPdAgentProcRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_agent_direction && true);
+        setPdIntraMonthRatioUpDown(resp.data.data.contract_content.quotation_info.quote_details.pd_intra_month_direction && true);
         
         // 补充信息
         setFilingParty(resp.data.data.contract_content.filing_party || filingParty);

@@ -299,7 +299,7 @@ const ContractDetail = () => {
         },    
         {
           label: "月度竞价出清价(¥)",
-          children:  `${info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_clear_price && info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
+          children:  `${info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_clear_price && info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_clear_price || '/'}`,
         },
 
 
@@ -309,7 +309,7 @@ const ContractDetail = () => {
         },    
         {
           label: "代理购电价格(¥)",
-          children:  `${info.contract_content?.quotation_info?.quote_details?.pd_agent_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_agent_proc_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_agent_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
+          children:  `${info.contract_content?.quotation_info?.quote_details?.pd_agent_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_agent_proc_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_agent_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_agent_avg_price || '/'}`,
         },
 
         {
@@ -318,7 +318,7 @@ const ContractDetail = () => {
         },    
         {
           label: "月内挂牌均价(¥)",
-          children:  `${info.contract_content?.quotation_info?.quote_details?.pd_intra_month_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_intra_month_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_intra_month_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
+          children:  `${info.contract_content?.quotation_info?.quote_details?.pd_intra_month_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_intra_month_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_intra_month_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_intra_month_avg_price || '/'}`,
         },
 
 

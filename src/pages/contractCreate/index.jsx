@@ -48,6 +48,11 @@ const ContractCreatedModal = (props) => {
 
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  
+  const [pdLongTermTransRatioUpDown, setPdLongTermTransRatioUpDown] = useState(true);
+  const [pdMonthlyBidRatioUpDown, setPdMonthlyBidRatioUpDown] = useState(true);
+  const [pdAgentProcRatioUpDown, setPdAgentProcRatioUpDown] = useState(true);
+  const [pdIntraMonthRatioUpDown, setPdIntraMonthRatioUpDown] = useState(true);
 
 
   useEffect(() => {
@@ -275,19 +280,55 @@ const ContractCreatedModal = (props) => {
       delete(req.quotation.quote_details.ps_agent_proc_limit);
       delete(req.quotation.quote_details.ps_intra_month_limit);
 
-      req.quotation.quote_details.pd_intra_month_ratio = isValidNumber(req.quotation.quote_details.pd_intra_month_ratio) ? Number(req.quotation.quote_details.pd_intra_month_ratio) : null;
-      req.quotation.quote_details.pd_intra_month_avg_price = isValidNumber(req.quotation.quote_details.pd_intra_month_avg_price) ? Number(req.quotation.quote_details.pd_intra_month_avg_price) : null;
+      if(isValidNumber(req.quotation.quote_details.pd_long_term_trans_ratio) && isValidNumber(req.quotation.quote_details.pd_long_term_trans_avg_price)) {
+        req.quotation.quote_details.pd_long_term_trans_direction = pdLongTermTransRatioUpDown;
+        req.quotation.quote_details.pd_long_term_trans_ratio = Number(req.quotation.quote_details.pd_long_term_trans_ratio);
+        req.quotation.quote_details.pd_long_term_trans_avg_price = Number(req.quotation.quote_details.pd_long_term_trans_avg_price);
+      }else {
+        req.quotation.quote_details.pd_long_term_trans_direction = null;
+        req.quotation.quote_details.pd_long_term_trans_ratio = null; 
+        req.quotation.quote_details.pd_long_term_trans_avg_price = null;
+      }
+
+
+      if(isValidNumber(req.quotation.quote_details.pd_monthly_bid_ratio) && isValidNumber(req.quotation.quote_details.pd_monthly_bid_clear_price)) {
+        req.quotation.quote_details.pd_monthly_bid_direction = pdMonthlyBidRatioUpDown;
+        req.quotation.quote_details.pd_monthly_bid_ratio = Number(req.quotation.quote_details.pd_monthly_bid_ratio);
+        req.quotation.quote_details.pd_monthly_bid_clear_price = Number(req.quotation.quote_details.pd_monthly_bid_clear_price);
+      }else {
+        req.quotation.quote_details.pd_monthly_bid_direction = null;
+        req.quotation.quote_details.pd_monthly_bid_ratio = null; 
+        req.quotation.quote_details.pd_monthly_bid_clear_price = null;
+      }
+
+
+      if(isValidNumber(req.quotation.quote_details.pd_agent_proc_ratio) && isValidNumber(req.quotation.quote_details.pd_agent_avg_price)) {
+
+        req.quotation.quote_details.pd_agent_direction = pdAgentProcRatioUpDown;
+        req.quotation.quote_details.pd_agent_proc_ratio = Number(req.quotation.quote_details.pd_agent_proc_ratio);
+        req.quotation.quote_details.pd_agent_avg_price = Number(req.quotation.quote_details.pd_agent_avg_price);
+      }else {
+        req.quotation.quote_details.pd_agent_direction = null;
+        req.quotation.quote_details.pd_agent_proc_ratio = null; 
+        req.quotation.quote_details.pd_agent_avg_price = null;
+      }
+
+
+      if(isValidNumber(req.quotation.quote_details.pd_intra_month_ratio)) {
+        req.quotation.quote_details.pd_intra_month_direction = pdIntraMonthRatioUpDown;
+        req.quotation.quote_details.pd_intra_month_ratio = Number(req.quotation.quote_details.pd_intra_month_ratio);
+        req.quotation.quote_details.pd_intra_month_avg_price = isValidNumber(req.quotation.quote_details.pd_intra_month_avg_price) ? Number(req.quotation.quote_details.pd_intra_month_avg_price) : null;
+      }else {
+        req.quotation.quote_details.pd_intra_month_direction = null;
+        req.quotation.quote_details.pd_intra_month_ratio = null; 
+        req.quotation.quote_details.pd_intra_month_avg_price = null;
+      }
+
       req.quotation.quote_details.pd_monthly_bid_limit = isValidNumber(req.quotation.quote_details.pd_monthly_bid_limit) ? Number(req.quotation.quote_details.pd_monthly_bid_limit) : null;
       req.quotation.quote_details.pd_agent_proc_limit = isValidNumber(req.quotation.quote_details.pd_agent_proc_limit) ? Number(req.quotation.quote_details.pd_agent_proc_limit) : null;
       req.quotation.quote_details.pd_intra_month_limit = isValidNumber(req.quotation.quote_details.pd_intra_month_limit) ? Number(req.quotation.quote_details.pd_intra_month_limit) : null;
       req.quotation.quote_details.pd_price_diff_fluc_ratio = isValidNumber(req.quotation.quote_details.pd_price_diff_fluc_ratio) ? Number(req.quotation.quote_details.pd_price_diff_fluc_ratio) : null;
-      req.quotation.quote_details.pd_long_term_trans_ratio = isValidNumber(req.quotation.quote_details.pd_long_term_trans_ratio) ? Number(req.quotation.quote_details.pd_long_term_trans_ratio) : null;
-      req.quotation.quote_details.pd_long_term_trans_avg_price = isValidNumber(req.quotation.quote_details.pd_long_term_trans_avg_price) ? Number(req.quotation.quote_details.pd_long_term_trans_avg_price) : null;
       req.quotation.quote_details.pd_long_term_trans_limit = isValidNumber(req.quotation.quote_details.pd_long_term_trans_limit) ? Number(req.quotation.quote_details.pd_long_term_trans_limit) : null;
-      req.quotation.quote_details.pd_monthly_bid_ratio = isValidNumber(req.quotation.quote_details.pd_monthly_bid_ratio) ? Number(req.quotation.quote_details.pd_monthly_bid_ratio) : null;
-      req.quotation.quote_details.pd_monthly_bid_clear_price = isValidNumber(req.quotation.quote_details.pd_monthly_bid_clear_price) ? Number(req.quotation.quote_details.pd_monthly_bid_clear_price) : null;
-      req.quotation.quote_details.pd_agent_proc_ratio = isValidNumber(req.quotation.quote_details.pd_agent_proc_ratio) ? Number(req.quotation.quote_details.pd_agent_proc_ratio) : null;
-      req.quotation.quote_details.pd_agent_avg_price = isValidNumber(req.quotation.quote_details.pd_agent_avg_price) ? Number(req.quotation.quote_details.pd_agent_avg_price) : null;
 
     }
 
@@ -665,27 +706,65 @@ const ContractCreatedModal = (props) => {
             </div>
 
             <div style={{display: (quote == 3 ? 'block': 'none') }}>
+               <Row justify="space-between" gutter={16}>
+                <Col span={12} ><Form.Item label="年度长协交易比例(%)" name={['quotation', 'quote_details', 'pd_long_term_trans_ratio']}><Input /></Form.Item></Col>
+                <Col span={12} >
+                  <Form.Item label="年度长协交易均价(¥)" name={['quotation', 'quote_details', 'pd_long_term_trans_avg_price']} >
+                    <Input addonBefore={
+                        <Select value={pdLongTermTransRatioUpDown}  onChange={(val) => {setPdLongTermTransRatioUpDown(val)}}>
+                          <Option value={true}>上浮</Option>
+                          <Option value={false}>下浮</Option>
+                        </Select>
+                      }/>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+               <Row justify="space-between" gutter={16}>
+                <Col span={12} ><Form.Item label="月度竞价比例(%)" name={['quotation', 'quote_details', 'pd_monthly_bid_ratio']}><Input /></Form.Item></Col>
+                <Col span={12} >
+                  <Form.Item label="月度竞价出清价(¥)" name={['quotation', 'quote_details', 'pd_monthly_bid_clear_price']} >
+                    <Input addonBefore={
+                      <Select value={pdMonthlyBidRatioUpDown} onChange={(val) => {setPdMonthlyBidRatioUpDown(val)}}>
+                        <Option value={true}>上浮</Option>
+                        <Option value={false}>下浮</Option>
+                      </Select>
+                    } />
+                  </Form.Item>
+                </Col>
+              </Row>
               <Row justify="space-between" gutter={16}>
-                <Col span={12} ><Form.Item label="月内挂牌比例(%)" name={['quotation', 'quote_details', 'pd_intra_month_ratio']}><Input /></Form.Item></Col>
-                <Col span={12} ><Form.Item label="月内挂牌均价(¥)" name={['quotation', 'quote_details', 'pd_intra_month_avg_price']} ><Input /></Form.Item></Col>
-              </Row>   
-              <Row justify="space-between" gutter={16}>
-                <Col span={8} ><Form.Item label="月度竞价限价" name={['quotation', 'quote_details', 'pd_monthly_bid_limit']}><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="代理购电限价" name={['quotation', 'quote_details', 'pd_agent_proc_limit']}><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="月内挂牌限价" name={['quotation', 'quote_details', 'pd_intra_month_limit']}><Input /></Form.Item></Col>
-              </Row>  
+                <Col span={12} ><Form.Item label="代理购电比例(%)" name={['quotation', 'quote_details', 'pd_agent_proc_ratio']}><Input /></Form.Item></Col>
+                <Col span={12} >
+                  <Form.Item label="代理购电价格(¥)" name={['quotation', 'quote_details', 'pd_agent_avg_price']} >
+                    <Input addonBefore={
+                          <Select value={pdAgentProcRatioUpDown} onChange={(val) => {setPdAgentProcRatioUpDown(val)}}>
+                            <Option value={true}>上浮</Option>
+                            <Option value={false}>下浮</Option>
+                          </Select>
+                        }/>
+                  </Form.Item>
+                </Col>
+              </Row>
+
 
               <Row justify="space-between" gutter={16}>
-                <Col span={6} ><Form.Item label="价差浮动比例(%)" name={['quotation', 'quote_details', 'pd_price_diff_fluc_ratio']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="长协交易比例(%)" name={['quotation', 'quote_details', 'pd_long_term_trans_ratio']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="长协交易均价(¥)" name={['quotation', 'quote_details', 'pd_long_term_trans_avg_price']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="长协交易限价(¥)" name={['quotation', 'quote_details', 'pd_long_term_trans_limit']}><Input /></Form.Item></Col>
-              </Row> 
+                <Col span={12} ><Form.Item label="月内挂牌比例(%)" name={['quotation', 'quote_details', 'pd_intra_month_ratio']}><Input /></Form.Item></Col>
+                <Col span={12} ><Form.Item label="月内挂牌均价(¥)" name={['quotation', 'quote_details', 'pd_intra_month_avg_price']} >
+                  <Input addonBefore={
+                    <Select value={pdIntraMonthRatioUpDown} onChange={(val) => {setPdIntraMonthRatioUpDown(val)}}>
+                      <Option value={true}>上浮</Option>
+                      <Option value={false}>下浮</Option>
+                    </Select>
+                  }/>
+                </Form.Item></Col>
+              </Row>
+
               <Row justify="space-between" gutter={16}>
-                <Col span={6} ><Form.Item label="月度竞价比例(%)" name={['quotation', 'quote_details', 'pd_monthly_bid_ratio']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="月度竞价出清价(¥)" name={['quotation', 'quote_details', 'pd_monthly_bid_clear_price']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="代理购电比例(%)" name={['quotation', 'quote_details', 'pd_agent_proc_ratio']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="代理挂牌均价(¥)" name={['quotation', 'quote_details', 'pd_agent_avg_price']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="年度长协交易限价(¥)" name={['quotation', 'quote_details', 'pd_long_term_trans_limit']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="月度竞价限价(¥)" name={['quotation', 'quote_details', 'pd_monthly_bid_limit']} ><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="代理购电限价(¥)" name={['quotation', 'quote_details', 'pd_agent_proc_limit']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="月内挂牌限价(¥)" name={['quotation', 'quote_details', 'pd_intra_month_limit']}><Input /></Form.Item></Col>
               </Row>   
             </div>
                 

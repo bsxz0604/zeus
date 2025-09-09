@@ -33,6 +33,10 @@ const ContractDetail = () => {
     });
   };  
 
+  const getUpOrDown = (val) => {
+    if(val) { return '上浮'} else { return '下浮'}
+  }
+
   const detailInfo = [
     {
       label: '甲方合同编号',
@@ -281,47 +285,13 @@ const ContractDetail = () => {
     if(quote_type == 3) {
       return [
         {
-          label: "月内挂牌比例(%)",
-          children: info.contract_content?.quote_details?.pd_intra_month_ratio|| '/',
+          label: "年度长协交易比例(%)",
+          children: info.contract_content?.quote_details?.pd_long_term_trans_ratio|| '/',
         },    
         {
-          label: "月内挂牌均价(¥)",
-          children: info.contract_content?.quote_details?.pd_intra_month_avg_price || '/',
+          label: "年度长协交易均价(¥)",
+          children:  `${info.contract_content?.quote_details?.pd_long_term_trans_avg_price && info.contract_content?.quote_details?.pd_long_term_trans_ratio ? getUpOrDown(info.contract_content?.quote_details?.pd_long_term_trans_direction) : '' }  ${info.contract_content?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
         },
-
-
-        {
-          label: "月度竞价限价",
-          children: info.contract_content?.quote_details?.pd_monthly_bid_limit|| '/',
-        },    
-        {
-          label: "代理购电限价",
-          children: info.contract_content?.quote_details?.pd_agent_proc_limit || '/',
-        },
-        {
-          label: "月内挂牌限价",
-          children: info.contract_content?.quote_details?.pd_intra_month_limit || '/',
-        },
-
-
-
-        {
-          label: "价差浮动比例(%)",
-          children: info.contract_content?.quote_details?.pd_price_diff_fluc_ratio|| '/',
-        },    
-        {
-          label: "长协交易比例(%)",
-          children: info.contract_content?.quote_details?.pd_long_term_trans_ratio || '/',
-        },
-        {
-          label: "长协交易均价(¥)",
-          children: info.contract_content?.quote_details?.pd_long_term_trans_avg_price|| '/',
-        },    
-        {
-          label: "长协交易限价(¥)",
-          children: info.contract_content?.quote_details?.pd_long_term_trans_limit || '/',
-        },
-
 
         {
           label: "月度竞价比例(%)",
@@ -329,15 +299,44 @@ const ContractDetail = () => {
         },    
         {
           label: "月度竞价出清价(¥)",
-          children: info.contract_content?.quote_details?.pd_monthly_bid_clear_price || '/',
+          children:  `${info.contract_content?.quote_details?.pd_monthly_bid_clear_price && info.contract_content?.quote_details?.pd_monthly_bid_ratio ? getUpOrDown(info.contract_content?.quote_details?.pd_monthly_bid_direction) : '' } ${info.contract_content?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
         },
+
+
         {
           label: "代理购电比例(%)",
           children: info.contract_content?.quote_details?.pd_agent_proc_ratio|| '/',
         },    
         {
-          label: "代理挂牌均价(¥)",
-          children: info.contract_content?.quote_details?.pd_agent_avg_price || '/',
+          label: "代理购电价格(¥)",
+          children:  `${info.contract_content?.quote_details?.pd_agent_avg_price && info.contract_content?.quote_details?.pd_agent_proc_ratio ? getUpOrDown(info.contract_content?.quote_details?.pd_agent_direction) : '' } ${info.contract_content?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
+        },
+
+        {
+          label: "月内挂牌比例(%)",
+          children: info.contract_content?.quote_details?.pd_intra_month_ratio|| '/',
+        },    
+        {
+          label: "月内挂牌均价(¥)",
+          children:  `${info.contract_content?.quote_details?.pd_intra_month_avg_price && info.contract_content?.quote_details?.pd_intra_month_ratio ? getUpOrDown(info.contract_content?.quote_details?.pd_intra_month_direction) : '' } ${info.contract_content?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
+        },
+
+
+        {
+          label: "年度长协交易限价(¥)",
+          children: info.contract_content?.quote_details?.pd_long_term_trans_limit|| '/',
+        },    
+        {
+          label: "月度竞价限价(¥)",
+          children: info.contract_content?.quote_details?.pd_monthly_bid_limit || '/',
+        },
+        {
+          label: "代理购电限价(¥)",
+          children: info.contract_content?.quote_details?.pd_agent_proc_limit|| '/',
+        },    
+        {
+          label: "月内挂牌限价(¥)",
+          children: info.contract_content?.quote_details?.pd_intra_month_limit || '/',
         }
       ]
     }

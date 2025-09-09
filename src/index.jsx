@@ -9,6 +9,8 @@ import reportWebVitals from './reportWebVitals';
 import ContractList from './pages/contractList/index';
 import ContractDetail from './pages/contractDetail/index';
 
+import SettlementCreate from './pages/settlementCreate/index'
+
 import ElectricPredictPrice from './pages/electricPredictPrice/index';
 
 import Customer from './pages/customer/index';
@@ -28,6 +30,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />}>
         <Route path={routerName.contract.list} element={<ContractList />} />
         <Route path={`${routerName.contract.list}/:id`} element={<ContractDetail />} />
+
+        <Route path={routerName.settlement} element={<SettlementCreate />} />
 
         <Route path="c" element={<div>正在建设中...</div>} />
 

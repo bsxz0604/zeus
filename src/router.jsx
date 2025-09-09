@@ -6,6 +6,7 @@ export const routerName = {
         list: '/contract',
         upload: '/contract-upload',
     },
+    settlement: '/settlement',
     electric: {
         predictPrice: 'electric-predic-price'
     },
@@ -66,12 +67,11 @@ export const routerItems =  [
         icon: <FileOutlined />,
         label: <Link to={routerName.contract.list} >合同管理</Link>,
     },
-    // {
-    //     key: `settlement`,
-    //     icon: <SolutionOutlined />,
-    //     label: `结算单模块`,
-    //     children: settlementItems,
-    // },
+    {
+        key: `settlement`,
+        icon: <SolutionOutlined />,
+        label: <Link to={routerName.settlement} >报价单生成</Link>,
+    },
     {
         key: `price`,
         icon: <TransactionOutlined />,

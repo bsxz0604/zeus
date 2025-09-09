@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Button, Form, Input, Row, Col, Space } from 'antd';
+import { Button, Form, Input, Row, Col, Space, message } from 'antd';
 
 import { CloseOutlined } from '@ant-design/icons';
   
@@ -12,6 +12,8 @@ const { TextArea } = Input;
 const SettlementCreate = (props) => {
 
   const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+
   
   useEffect(() => {
 
@@ -33,6 +35,7 @@ const SettlementCreate = (props) => {
       downloadLink.click();
       document.body.removeChild(downloadLink);
       window.URL.revokeObjectURL(url);
+      messageApi.success("创建成功")
     })
   } 
 
@@ -44,6 +47,7 @@ const SettlementCreate = (props) => {
 
   return (
     <>
+      {contextHolder}
       <Form
         form={form}
         labelCol={{ span: 24 }}

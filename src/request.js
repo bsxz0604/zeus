@@ -35,12 +35,11 @@ export function ContractPDF(id) {
 
 
 export function CreateSettlement(data) {
-    return service.post(`/api/v1/generatebill`, {
+    return service.post(`/api/v1/bills/generatebill`, {
         ...data,
         responseType: 'blob',
     }) 
 }
-
 
 
 export function CreateContract(data) {

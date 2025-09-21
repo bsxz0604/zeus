@@ -398,6 +398,346 @@ const ContractCreatedModal = (props) => {
     if(info.filing_party && info.filing_party != filingParty)  {
       setFilingParty(info.filing_party);
     }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_below_long_term) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_below_long_term)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_below_long_term: 100 - Number(info.quotation.quote_details.ps_party_a_prop_below_long_term)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_long_term: '/',
+              ps_party_b_prop_below_long_term:  '/',
+            }
+          }
+        });
+      } 
+    }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_below_long_term) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_below_long_term)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_long_term: 100 - Number(info.quotation.quote_details.ps_party_b_prop_below_long_term)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_long_term: '/',
+              ps_party_b_prop_below_long_term:  '/',
+            }
+          }
+        });
+      }
+    }
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_above_long_term) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_above_long_term)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_above_long_term: 100 - Number(info.quotation.quote_details.ps_party_a_prop_above_long_term)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_long_term: '/',
+              ps_party_b_prop_above_long_term:  '/',
+            }
+          }
+        });
+      }
+    }
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_above_long_term) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_above_long_term)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_long_term: 100 - Number(info.quotation.quote_details.ps_party_b_prop_above_long_term)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_long_term: '/',
+              ps_party_b_prop_above_long_term:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_below_monthly_bid) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_below_monthly_bid)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_below_monthly_bid: 100 - Number(info.quotation.quote_details.ps_party_a_prop_below_monthly_bid)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_monthly_bid: '/',
+              ps_party_b_prop_below_monthly_bid:  '/',
+            }
+          }
+        });
+      }
+    }
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_below_monthly_bid) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_below_monthly_bid)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_monthly_bid: 100 - Number(info.quotation.quote_details.ps_party_b_prop_below_monthly_bid)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_monthly_bid: '/',
+              ps_party_b_prop_below_monthly_bid:  '/',
+            }
+          }
+        });
+      }
+    }
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_above_monthly_bid) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_above_monthly_bid)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_above_monthly_bid: 100 - Number(info.quotation.quote_details.ps_party_a_prop_above_monthly_bid)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_monthly_bid: '/',
+              ps_party_b_prop_above_monthly_bid:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_above_monthly_bid) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_above_monthly_bid)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_monthly_bid: 100 - Number(info.quotation.quote_details.ps_party_b_prop_above_monthly_bid)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_monthly_bid: '/',
+              ps_party_b_prop_above_monthly_bid:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_below_agent_proc) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_below_agent_proc)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_below_agent_proc: 100 - Number(info.quotation.quote_details.ps_party_a_prop_below_agent_proc)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_agent_proc: '/',
+              ps_party_b_prop_below_agent_proc:  '/',
+            }
+          }
+        });
+      }
+    }
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_below_agent_proc) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_below_agent_proc)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_agent_proc: 100 - Number(info.quotation.quote_details.ps_party_b_prop_below_agent_proc)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_agent_proc: '/',
+              ps_party_b_prop_below_agent_proc:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_above_agent_proc) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_above_agent_proc)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_above_agent_proc: 100 - Number(info.quotation.quote_details.ps_party_a_prop_above_agent_proc)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_agent_proc: '/',
+              ps_party_b_prop_above_agent_proc:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_above_agent_proc) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_above_agent_proc)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_agent_proc: 100 - Number(info.quotation.quote_details.ps_party_b_prop_above_agent_proc)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_agent_proc: '/',
+              ps_party_b_prop_above_agent_proc:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_below_intra_month) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_below_intra_month)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_below_intra_month: 100 - Number(info.quotation.quote_details.ps_party_a_prop_below_intra_month)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_intra_month: '/',
+              ps_party_b_prop_below_intra_month:  '/',
+            }
+          }
+        });
+      }
+    }
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_below_intra_month) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_below_intra_month)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_intra_month: 100 - Number(info.quotation.quote_details.ps_party_b_prop_below_intra_month)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_below_intra_month: '/',
+              ps_party_b_prop_below_intra_month:  '/',
+            }
+          }
+        });
+      }
+    }
+  
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_a_prop_above_intra_month) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_a_prop_above_intra_month)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_b_prop_above_intra_month: 100 - Number(info.quotation.quote_details.ps_party_a_prop_above_intra_month)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_intra_month: '/',
+              ps_party_b_prop_above_intra_month:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+
+    if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_above_intra_month) {
+      if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_above_intra_month)) {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_intra_month: 100 - Number(info.quotation.quote_details.ps_party_b_prop_above_intra_month)
+            }
+          }
+        });
+      } else {
+        form.setFieldsValue({
+          quotation: {
+            quote_details: {
+              ps_party_a_prop_above_intra_month: '/',
+              ps_party_b_prop_above_intra_month:  '/',
+            }
+          }
+        });
+      }
+    }
+    
+
   };
 
   return (
@@ -678,29 +1018,29 @@ const ContractCreatedModal = (props) => {
 
               <Row justify="space-between" gutter={16}>
                 <Col span={6} ><Form.Item label="低于长协交易价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_below_long_term']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="低于长协交易价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_long_term']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="高于长协交易价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_long_term']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="高于长协交易价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_long_term']}><Input /></Form.Item></Col>
-              </Row>   
-             
-              <Row justify="space-between" gutter={16}>
                 <Col span={6} ><Form.Item label="低于月度竞价价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_below_monthly_bid']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="低于月度竞价价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_monthly_bid']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="高于月度竞价价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_monthly_bid']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="高于月度竞价价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_monthly_bid']}><Input /></Form.Item></Col>
-              </Row>  
-            
-              <Row justify="space-between" gutter={16}>
                 <Col span={6} ><Form.Item label="低于代理购电价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_below_agent_proc']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="低于代理购电价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_agent_proc']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="高于代理购电价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_agent_proc']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="高于代理购电价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_agent_proc']}><Input /></Form.Item></Col>
-              </Row>   
+                <Col span={6} ><Form.Item label="低于月内挂牌价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_below_intra_month']} ><Input /></Form.Item></Col>
+              </Row>
 
               <Row justify="space-between" gutter={16}>
-                <Col span={6} ><Form.Item label="低于月内挂牌价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_below_intra_month']} ><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="低于长协交易价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_long_term']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="低于月度竞价价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_monthly_bid']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="低于代理购电价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_agent_proc']}><Input /></Form.Item></Col>
                 <Col span={6} ><Form.Item label="低于月内挂牌价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_below_intra_month']}><Input /></Form.Item></Col>
+              </Row>
+
+              <Row justify="space-between" gutter={16}>
+                <Col span={6} ><Form.Item label="高于长协交易价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_long_term']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="高于月度竞价价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_monthly_bid']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="高于代理购电价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_agent_proc']}><Input /></Form.Item></Col>
                 <Col span={6} ><Form.Item label="高于月内挂牌价格甲方比例(%)" name={['quotation', 'quote_details', 'ps_party_a_prop_above_intra_month']}><Input /></Form.Item></Col>
+              </Row>
+
+              <Row justify="space-between" gutter={16}>
+                <Col span={6} ><Form.Item label="高于长协交易价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_long_term']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="高于月度竞价价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_monthly_bid']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="高于代理购电价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_agent_proc']}><Input /></Form.Item></Col>
                 <Col span={6} ><Form.Item label="高于月内挂牌价格乙方比例(%)" name={['quotation', 'quote_details', 'ps_party_b_prop_above_intra_month']}><Input /></Form.Item></Col>
               </Row>   
             </div>

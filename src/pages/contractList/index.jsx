@@ -87,14 +87,14 @@ const ContractList = () => {
   };
 
 
-  const downloadContractWord = (id) => {
+  const downloadContractWord = (id, name) => {
     ContractPDF(id).then((resp) => {
       const blobObj = new Blob([resp.data], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
       const downloadLink = document.createElement('a');
       let url = window.URL || window.webkitURL || window.moxURL; // 浏览器兼容
       url = url.createObjectURL(blobObj);
       downloadLink.href = url;
-      downloadLink.download = `contract_${id}_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.docx`;
+      downloadLink.download = `${name}_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.docx`;
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -228,7 +228,7 @@ const ContractList = () => {
           fixed='right'
           render={(_, record) => (
               <Space size="middle">
-                <Button color="default" variant="link" className='nopadding' onClick={() => downloadContractWord(record.contract_id)}>生成合同</Button>
+                <Button color="default" variant="link" className='nopadding' onClick={() => downloadContractWord(record.contract_id, record.party_a_company_name)}>生成合同</Button>
                 <Link to={`${routerName.contract.list}/${record.contract_id}`}>详情</Link>
                 <ContractEditModal id={record.contract_id} reload={reload} messageApi={messageApi}/>
                 <DoubleConfirmButton id={record.contract_id} reload={reload} messageApi={messageApi}/>

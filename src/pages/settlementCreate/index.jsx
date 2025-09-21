@@ -30,7 +30,7 @@ const SettlementCreate = (props) => {
       let url = window.URL || window.webkitURL || window.moxURL; // 浏览器兼容
       url = url.createObjectURL(blobObj);
       downloadLink.href = url;
-      downloadLink.download = `settlement_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.docx`;
+      downloadLink.download = `${data.party_a_name}_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.docx`;
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);

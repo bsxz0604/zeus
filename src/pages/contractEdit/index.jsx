@@ -42,6 +42,9 @@ const ContractEditModal = (props) => {
 
   const [choosedPartyAId , setChoosedPartyAId] = useState('');
   const [partyACustomname, setPartyACustomname] = useState('');
+  const [partyACustomLegalPerson, setPartyACustomLegalPerson] = useState('');
+  const [partyACustomCreditCode,  setPartyACustomCreditCode] = useState('');
+  const [partyACustomCompanyAddress,  setPartyACustomCompanyAddress] = useState('');
 
 
   const [filingMethod, setFilingMethod] = useState('(2)');
@@ -77,6 +80,10 @@ const ContractEditModal = (props) => {
           //自定义
           setChoosedPartyAId(noChoosedPartyA);
           setPartyACustomname(resp.data.data.contract_content.party_a_custom_company);
+          setPartyACustomLegalPerson(resp.data.data.contract_content.party_a_custom_legal_person);
+          setPartyACustomCreditCode(resp.data.data.contract_content.party_a_custom_credit_code);
+          setPartyACustomCompanyAddress(resp.data.data.contract_content.party_a_custom_address);
+
           form.setFieldsValue({
             party_a_id: noChoosedPartyA,
           })
@@ -511,6 +518,9 @@ const ContractEditModal = (props) => {
       if(info.party_a_id == noChoosedPartyA) {
         setChoosedPartyAInfo({});
         setPartyACustomname();
+        setPartyACustomLegalPerson();
+        setPartyACustomCreditCode();
+        setPartyACustomCompanyAddress();
       }
       
       customerList.map(i => {
@@ -891,26 +901,6 @@ const ContractEditModal = (props) => {
           onValuesChange={onFormLayoutChange}
         >
           <>
-            <Divider orientation="center" size='large'>合同基本信息</Divider>
-
-            <Row justify="space-between" gutter={16}>
-              <Col span={12} ><Form.Item required label="甲方合同编号" name="party_a_contract_no" ><Input /></Form.Item></Col>
-              <Col span={12} ><Form.Item required label="乙方合同编号" name="party_b_contract_no" ><Input /></Form.Item></Col>
-            </Row> 
-            <Row justify="space-between" gutter={16}>
-              <Col span={12} >
-                <Form.Item required label="甲方签订日期" name="party_a_sign_date">
-                  <DatePicker style={{width:'100%'}} />
-                </Form.Item>
-              </Col>
-              <Col span={12} >
-                <Form.Item required label="乙方签订日期" name="party_b_sign_date">
-                  <DatePicker style={{width:'100%'}} />
-                </Form.Item>
-              </Col>
-            </Row> 
-          </>
-          <>
             <Divider orientation="center" size='large'>甲方详细信息</Divider>
 
             <Row justify="space-between" gutter={16}>
@@ -933,40 +923,57 @@ const ContractEditModal = (props) => {
                 <>
                   <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
                     <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>甲方主体名</p>
-                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomname} onChange={setCusPartyAName}/></div>
+                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomname} onChange={(e) => {setPartyACustomname(e.target.value)}}/></div>
                   </Col>
-                  <Col span={8}></Col>
+                   <Col span={8}></Col>
                 </>
                 :
                 <>
                   <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
-                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>法人</p>
-                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.legal_person}/></div>
+                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>经办人姓名</p>
+                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.contact_person}/></div>
                   </Col>
                   <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
-                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>统一社会信用代码</p>
-                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.credit_code}/></div>
+                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>经办人电话</p>
+                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.contact_phone}/></div>
                   </Col>
                 </>
               }              
             </Row> 
             {
-                choosedPartyAId && choosedPartyAId == noChoosedPartyA ? null :
+                choosedPartyAId && choosedPartyAId == noChoosedPartyA ? 
+                <div style={{display: (choosedPartyAId ? 'block': 'none'), marginTop:'-14px'}}>
+                  <Row justify="space-between" gutter={16}>
+                    <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
+                      <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '30px'}}>法人</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomLegalPerson} onChange={(e) => {setPartyACustomLegalPerson(e.target.value)}}/></div>
+                    </Col>
+                    <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
+                      <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '30px'}}>统一社会信用代码</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomCreditCode} onChange={(e) => {setPartyACustomCreditCode(e.target.value)}}/></div>
+                    </Col>
+                    <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
+                      <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '30px'}}>公司地址</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomCompanyAddress} onChange={(e) => {setPartyACustomCompanyAddress(e.target.value)}}/></div>
+                    </Col>
+                  </Row>  
+                </div>
+                :
                 <div style={{display: (choosedPartyAId ? 'block': 'none'), marginTop:'-24px'}}>
                   <Row justify="space-between" gutter={16}>
                     <Col span={8} >
-                      <p>经办人姓名</p>
-                      <div><Input disabled={choosedPartyAId != noChoosedPartyA }  value={choosedPartyAInfo.contact_person}/></div>
+                      <p>法人</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA }  value={choosedPartyAInfo.legal_person}/></div>
                     </Col>
                     <Col span={8} >
-                      <p>经办人电话</p>
-                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.contact_phone}/></div>
+                      <p>统一社会信用代码</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.credit_code}/></div>
                     </Col>
                     <Col span={8} >
-                      <p>开户银行</p>
-                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.depository_bank}/></div>
+                      <p>公司地址</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.company_address}/></div>
                     </Col>
-                  </Row>  
+                  </Row> 
                 </div>
             }
           </>

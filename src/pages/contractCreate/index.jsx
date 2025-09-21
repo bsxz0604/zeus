@@ -39,6 +39,12 @@ const ContractCreatedModal = (props) => {
 
   const [choosedPartyAId , setChoosedPartyAId] = useState('');
   const [partyACustomname, setPartyACustomname] = useState('');
+  const [partyACustomLegalPerson, setPartyACustomLegalPerson] = useState('');
+  const [partyACustomCreditCode,  setPartyACustomCreditCode] = useState('');
+  const [partyACustomCompanyAddress,  setPartyACustomCompanyAddress] = useState('');
+
+  
+
   const [filingMethod, setFilingMethod] = useState('(2)');
 
   const [filingParty, setFilingParty] = useState('乙');
@@ -119,9 +125,9 @@ const ContractCreatedModal = (props) => {
       req.party_a_custom = true;
       // req.party_a_id =  -1,
       req.party_a_custom_company = partyACustomname;
-      // req.party_a_custom_credit_code = '';
-      // req.party_a_custom_legal_person = '';
-      // req.party_a_custom_address = '';
+      req.party_a_custom_credit_code = partyACustomCreditCode ;
+      req.party_a_custom_legal_person = partyACustomLegalPerson;
+      req.party_a_custom_address = partyACustomCompanyAddress;
       // req.party_a_custom_bank = '';
       // req.party_a_custom_bank_account = '';
       // req.party_a_custom_contact_person = '';
@@ -368,11 +374,6 @@ const ContractCreatedModal = (props) => {
     setOpen(false);
   };
 
-  const setCusPartyAName = (e) => {
-    setPartyACustomname(e.target.value);
-  }
-
-
   const onFormLayoutChange = (info) => {
     if(info.quotation && info.quotation.quote_type_id && info.quotation.quote_type_id != quote) {
       setQuote(info.quotation.quote_type_id);
@@ -383,6 +384,9 @@ const ContractCreatedModal = (props) => {
       if(info.party_a_id == noChoosedPartyA) {
         setChoosedPartyAInfo({});
         setPartyACustomname();
+        setPartyACustomLegalPerson();
+        setPartyACustomCreditCode();
+        setPartyACustomCompanyAddress();
       }
       
       customerList.map(i => {
@@ -715,7 +719,6 @@ const ContractCreatedModal = (props) => {
       }
     }
     
-
     if(info.quotation && info.quotation.quote_details && info.quotation.quote_details.ps_party_b_prop_above_intra_month) {
       if(isValidNumber(info.quotation.quote_details.ps_party_b_prop_above_intra_month)) {
         form.setFieldsValue({
@@ -736,7 +739,6 @@ const ContractCreatedModal = (props) => {
         });
       }
     }
-    
 
   };
 
@@ -894,38 +896,55 @@ const ContractCreatedModal = (props) => {
                 <>
                   <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
                     <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>甲方主体名</p>
-                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomname} onChange={setCusPartyAName}/></div>
+                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomname} onChange={(e) => {setPartyACustomname(e.target.value)}}/></div>
                   </Col>
-                  <Col span={8}></Col>
+                   <Col span={8}></Col>
                 </>
                 :
                 <>
                   <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
-                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>法人</p>
-                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.legal_person}/></div>
+                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>经办人姓名</p>
+                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.contact_person}/></div>
                   </Col>
                   <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
-                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>统一社会信用代码</p>
-                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.credit_code}/></div>
+                    <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '36px'}}>经办人电话</p>
+                    <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.contact_phone}/></div>
                   </Col>
                 </>
               }              
             </Row> 
             {
-                choosedPartyAId && choosedPartyAId == noChoosedPartyA ? null :
+                choosedPartyAId && choosedPartyAId == noChoosedPartyA ? 
+                <div style={{display: (choosedPartyAId ? 'block': 'none'), marginTop:'-14px'}}>
+                  <Row justify="space-between" gutter={16}>
+                    <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
+                      <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '30px'}}>法人</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomLegalPerson} onChange={(e) => {setPartyACustomLegalPerson(e.target.value)}}/></div>
+                    </Col>
+                    <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
+                      <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '30px'}}>统一社会信用代码</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomCreditCode} onChange={(e) => {setPartyACustomCreditCode(e.target.value)}}/></div>
+                    </Col>
+                    <Col span={8} style={{display: (choosedPartyAId ? 'block': 'none')}}>
+                      <p style={{padding: '0 0 8px', margin: 0, height: '40px', boxSizing: 'border-box', lineHeight: '30px'}}>公司地址</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={partyACustomCompanyAddress} onChange={(e) => {setPartyACustomCompanyAddress(e.target.value)}}/></div>
+                    </Col>
+                  </Row>  
+                </div>
+                :
                 <div style={{display: (choosedPartyAId ? 'block': 'none'), marginTop:'-24px'}}>
                   <Row justify="space-between" gutter={16}>
                     <Col span={8} >
-                      <p>经办人姓名</p>
-                      <div><Input disabled={choosedPartyAId != noChoosedPartyA }  value={choosedPartyAInfo.contact_person}/></div>
+                      <p>法人</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA }  value={choosedPartyAInfo.legal_person}/></div>
                     </Col>
                     <Col span={8} >
-                      <p>经办人电话</p>
-                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.contact_phone}/></div>
+                      <p>统一社会信用代码</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.credit_code}/></div>
                     </Col>
                     <Col span={8} >
-                      <p>开户银行</p>
-                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.depository_bank}/></div>
+                      <p>公司地址</p>
+                      <div><Input disabled={choosedPartyAId != noChoosedPartyA } value={choosedPartyAInfo.company_address}/></div>
                     </Col>
                   </Row>  
                 </div>

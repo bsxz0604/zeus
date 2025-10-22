@@ -170,24 +170,24 @@ const ContractDetail = () => {
           children: info.contract_content?.quotation_info?.quote_details?.ps_prop_sharing_ratio|| '/',
         },    
         {
-          label: '分成参考价(¥)',
+          label: '分成参考价(元/千瓦时)',
           children: info.contract_content?.quotation_info?.quote_details?.ps_dist_ref_price || '/',
         },    
         {
-          label: '长协交易限价(¥)',
+          label: '长协交易限价(元/千瓦时)',
           children: info.contract_content?.quotation_info?.quote_details?.ps_long_term_trans_ratio || '/',
         },
 
         {
-          label: '月度竞价限价(¥)',
+          label: '月度竞价限价(元/千瓦时)',
           children: info.contract_content?.quotation_info?.quote_details?.ps_monthly_bid_limit|| '/',
         },    
         {
-          label: '代理购电限价(¥)',
+          label: '代理购电限价(元/千瓦时)',
           children: info.contract_content?.quotation_info?.quote_details?.ps_agent_proc_limit || '/',
         },    
         {
-          label: '月内挂牌限价(¥)',
+          label: '月内挂牌限价(元/千瓦时)',
           children: info.contract_content?.quotation_info?.quote_details?.ps_intra_month_limit || '/',
         },
 
@@ -289,7 +289,7 @@ const ContractDetail = () => {
           children: info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_ratio|| '/',
         },    
         {
-          label: "年度长协交易均价(¥)",
+          label: "年度长协交易均价(元/千瓦时)",
           children:  `${info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_direction) : '' }  ${info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_avg_price || '/'}`,
         },
 
@@ -298,7 +298,7 @@ const ContractDetail = () => {
           children: info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_ratio|| '/',
         },    
         {
-          label: "月度竞价出清价(¥)",
+          label: "月度竞价出清价(元/千瓦时)",
           children:  `${info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_clear_price && info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_clear_price || '/'}`,
         },
 
@@ -308,7 +308,7 @@ const ContractDetail = () => {
           children: info.contract_content?.quotation_info?.quote_details?.pd_agent_proc_ratio|| '/',
         },    
         {
-          label: "代理购电价格(¥)",
+          label: "代理购电价格(元/千瓦时)",
           children:  `${info.contract_content?.quotation_info?.quote_details?.pd_agent_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_agent_proc_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_agent_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_agent_avg_price || '/'}`,
         },
 
@@ -317,25 +317,25 @@ const ContractDetail = () => {
           children: info.contract_content?.quotation_info?.quote_details?.pd_intra_month_ratio|| '/',
         },    
         {
-          label: "月内挂牌均价(¥)",
+          label: "月内挂牌均价(元/千瓦时)",
           children:  `${info.contract_content?.quotation_info?.quote_details?.pd_intra_month_avg_price && info.contract_content?.quotation_info?.quote_details?.pd_intra_month_ratio ? getUpOrDown(info.contract_content?.quotation_info?.quote_details?.pd_intra_month_direction) : '' } ${info.contract_content?.quotation_info?.quote_details?.pd_intra_month_avg_price || '/'}`,
         },
 
 
         {
-          label: "年度长协交易限价(¥)",
+          label: "年度长协交易限价(元/千瓦时)",
           children: info.contract_content?.quotation_info?.quote_details?.pd_long_term_trans_limit|| '/',
         },    
         {
-          label: "月度竞价限价(¥)",
+          label: "月度竞价限价(元/千瓦时)",
           children: info.contract_content?.quotation_info?.quote_details?.pd_monthly_bid_limit || '/',
         },
         {
-          label: "代理购电限价(¥)",
+          label: "代理购电限价(元/千瓦时)",
           children: info.contract_content?.quotation_info?.quote_details?.pd_agent_proc_limit|| '/',
         },    
         {
-          label: "月内挂牌限价(¥)",
+          label: "月内挂牌限价(元/千瓦时)",
           children: info.contract_content?.quotation_info?.quote_details?.pd_intra_month_limit || '/',
         }
       ]
@@ -367,7 +367,7 @@ const ContractDetail = () => {
     },
 
     {
-      label: '绿电电价(¥)',
+      label: '绿电电价(元/千瓦时)',
       children: info.contract_content?.quotation_info?.green_elec_price|| '/',
     },
 
@@ -392,7 +392,7 @@ const ContractDetail = () => {
       children: info.contract_content?.quotation_info?.positive_deviation_ratio || '/',
     },
     {
-      label: '用电量正偏差外价格(¥)',
+      label: '用电量正偏差外价格(元/千瓦时)',
       children: info.contract_content?.quotation_info?.positive_deviation_price || '/',
     },
     {
@@ -400,7 +400,7 @@ const ContractDetail = () => {
       children: info.contract_content?.quotation_info?.negative_deviation_ratio || '/',
     },
     {
-      label: '用电量负偏差外价格(¥)',
+      label: '用电量负偏差外价格(元/千瓦时)',
       children: info.contract_content?.quotation_info?.negative_deviation_price || '/',
     },
 
@@ -410,7 +410,7 @@ const ContractDetail = () => {
       children: info.contract_content?.quotation_info?.curve_positive_ratio || '/',
     },
     {
-      label: '用电曲线超出正偏差外价格(¥)',
+      label: '用电曲线超出正偏差外价格(元/千瓦时)',
       children: info.contract_content?.quotation_info?.curve_positive_price || '/',
     },
     {
@@ -418,7 +418,7 @@ const ContractDetail = () => {
       children: info.contract_content?.quotation_info?.curve_negative_ratio || '/',
     },
     {
-      label: '用电曲线负偏差外价格(¥)',
+      label: '用电曲线负偏差外价格(元/千瓦时)',
       children: info.contract_content?.quotation_info?.curve_negative_price || '/',
     },
 

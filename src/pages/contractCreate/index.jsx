@@ -993,7 +993,7 @@ const ContractCreatedModal = (props) => {
               </Col>
             </Row>
             <Row justify="space-between" gutter={16}>
-              <Col span={24} ><Form.Item label="绿电电价(¥)" name={['quotation', 'green_elec_price']} ><Input /></Form.Item></Col>
+              <Col span={24} ><Form.Item label="绿电电价(元/千瓦时)" name={['quotation', 'green_elec_price']} ><Input /></Form.Item></Col>
             </Row>
 
 
@@ -1009,22 +1009,22 @@ const ContractCreatedModal = (props) => {
             <div style={{display: (quote == 1 ? 'block': 'none') }}>
               <Row justify="space-between" gutter={16}>
                 <Col span={8} ><Form.Item label="固定价格用电量比例(%)" name={['quotation', 'quote_details', 'fixed_price_ratio']} ><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="市场化成交电价(¥)" name={['quotation', 'quote_details', 'market_transaction_price']}><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="限价(¥)" name={['quotation', 'quote_details', 'price_limit']}><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="市场化成交电价(元/千瓦时)" name={['quotation', 'quote_details', 'market_transaction_price']}><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="限价(元/千瓦时)" name={['quotation', 'quote_details', 'price_limit']}><Input /></Form.Item></Col>
               </Row>  
             </div>
 
             <div style={{display: (quote == 2 ? 'block': 'none') }}>    
               <Row justify="space-between" gutter={16}>
                 <Col span={8} ><Form.Item label="比例分成用电量比例(%)" name={['quotation', 'quote_details', 'ps_prop_sharing_ratio']} ><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="分成参考价(¥)" name={['quotation', 'quote_details', 'ps_dist_ref_price']}><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="长协交易限价(¥)" name={['quotation', 'quote_details', 'ps_long_term_trans_limit']} ><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="分成参考价(元/千瓦时)" name={['quotation', 'quote_details', 'ps_dist_ref_price']}><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="长协交易限价(元/千瓦时)" name={['quotation', 'quote_details', 'ps_long_term_trans_limit']} ><Input /></Form.Item></Col>
               </Row> 
 
               <Row justify="space-between" gutter={16}>
-                <Col span={8} ><Form.Item label="月度竞价限价(¥)" name={['quotation', 'quote_details', 'ps_monthly_bid_limit']} ><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="代理购电限价(¥)" name={['quotation', 'quote_details', 'ps_agent_proc_limit']}><Input /></Form.Item></Col>
-                <Col span={8} ><Form.Item label="月内挂牌限价(¥)" name={['quotation', 'quote_details', 'ps_intra_month_limit']} ><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="月度竞价限价(元/千瓦时)" name={['quotation', 'quote_details', 'ps_monthly_bid_limit']} ><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="代理购电限价(元/千瓦时)" name={['quotation', 'quote_details', 'ps_agent_proc_limit']}><Input /></Form.Item></Col>
+                <Col span={8} ><Form.Item label="月内挂牌限价(元/千瓦时)" name={['quotation', 'quote_details', 'ps_intra_month_limit']} ><Input /></Form.Item></Col>
               </Row> 
 
 
@@ -1068,7 +1068,7 @@ const ContractCreatedModal = (props) => {
                <Row justify="space-between" gutter={16}>
                 <Col span={12} ><Form.Item label="年度长协交易比例(%)" name={['quotation', 'quote_details', 'pd_long_term_trans_ratio']}><Input /></Form.Item></Col>
                 <Col span={12} >
-                  <Form.Item label="年度长协交易均价(¥)" name={['quotation', 'quote_details', 'pd_long_term_trans_avg_price']} >
+                  <Form.Item label="年度长协交易均价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_long_term_trans_avg_price']} >
                     <Input addonBefore={
                         <Select value={pdLongTermTransRatioUpDown}  onChange={(val) => {setPdLongTermTransRatioUpDown(val)}}>
                           <Option value={true}>上浮</Option>
@@ -1082,7 +1082,7 @@ const ContractCreatedModal = (props) => {
                <Row justify="space-between" gutter={16}>
                 <Col span={12} ><Form.Item label="月度竞价比例(%)" name={['quotation', 'quote_details', 'pd_monthly_bid_ratio']}><Input /></Form.Item></Col>
                 <Col span={12} >
-                  <Form.Item label="月度竞价出清价(¥)" name={['quotation', 'quote_details', 'pd_monthly_bid_clear_price']} >
+                  <Form.Item label="月度竞价出清价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_monthly_bid_clear_price']} >
                     <Input addonBefore={
                       <Select value={pdMonthlyBidRatioUpDown} onChange={(val) => {setPdMonthlyBidRatioUpDown(val)}}>
                         <Option value={true}>上浮</Option>
@@ -1095,7 +1095,7 @@ const ContractCreatedModal = (props) => {
               <Row justify="space-between" gutter={16}>
                 <Col span={12} ><Form.Item label="代理购电比例(%)" name={['quotation', 'quote_details', 'pd_agent_proc_ratio']}><Input /></Form.Item></Col>
                 <Col span={12} >
-                  <Form.Item label="代理购电价格(¥)" name={['quotation', 'quote_details', 'pd_agent_avg_price']} >
+                  <Form.Item label="代理购电价格(元/千瓦时)" name={['quotation', 'quote_details', 'pd_agent_avg_price']} >
                     <Input addonBefore={
                           <Select value={pdAgentProcRatioUpDown} onChange={(val) => {setPdAgentProcRatioUpDown(val)}}>
                             <Option value={true}>上浮</Option>
@@ -1109,7 +1109,7 @@ const ContractCreatedModal = (props) => {
 
               <Row justify="space-between" gutter={16}>
                 <Col span={12} ><Form.Item label="月内挂牌比例(%)" name={['quotation', 'quote_details', 'pd_intra_month_ratio']}><Input /></Form.Item></Col>
-                <Col span={12} ><Form.Item label="月内挂牌均价(¥)" name={['quotation', 'quote_details', 'pd_intra_month_avg_price']} >
+                <Col span={12} ><Form.Item label="月内挂牌均价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_intra_month_avg_price']} >
                   <Input addonBefore={
                     <Select value={pdIntraMonthRatioUpDown} onChange={(val) => {setPdIntraMonthRatioUpDown(val)}}>
                       <Option value={true}>上浮</Option>
@@ -1120,10 +1120,10 @@ const ContractCreatedModal = (props) => {
               </Row>
 
               <Row justify="space-between" gutter={16}>
-                <Col span={6} ><Form.Item label="年度长协交易限价(¥)" name={['quotation', 'quote_details', 'pd_long_term_trans_limit']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="月度竞价限价(¥)" name={['quotation', 'quote_details', 'pd_monthly_bid_limit']} ><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="代理购电限价(¥)" name={['quotation', 'quote_details', 'pd_agent_proc_limit']}><Input /></Form.Item></Col>
-                <Col span={6} ><Form.Item label="月内挂牌限价(¥)" name={['quotation', 'quote_details', 'pd_intra_month_limit']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="年度长协交易限价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_long_term_trans_limit']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="月度竞价限价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_monthly_bid_limit']} ><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="代理购电限价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_agent_proc_limit']}><Input /></Form.Item></Col>
+                <Col span={6} ><Form.Item label="月内挂牌限价(元/千瓦时)" name={['quotation', 'quote_details', 'pd_intra_month_limit']}><Input /></Form.Item></Col>
               </Row>   
             </div>
                 
@@ -1141,16 +1141,16 @@ const ContractCreatedModal = (props) => {
             
             <Row justify="space-between" gutter={16}>
               <Col span={6} ><Form.Item label="用电量超出正偏差比例(%)" name={['quotation', 'positive_deviation_ratio']} ><Input /></Form.Item></Col>
-              <Col span={6} ><Form.Item label="用电量正偏差外价格(¥)" name={['quotation', 'positive_deviation_price']} ><Input /></Form.Item></Col>
+              <Col span={6} ><Form.Item label="用电量正偏差外价格(元/千瓦时)" name={['quotation', 'positive_deviation_price']} ><Input /></Form.Item></Col>
               <Col span={6} ><Form.Item label="用电量超出负偏差比例(%)" name={['quotation', 'negative_deviation_ratio']} ><Input /></Form.Item></Col>
-              <Col span={6} ><Form.Item label="用电量负偏差外价格(¥)" name={['quotation', 'negative_deviation_price']} ><Input  /></Form.Item></Col>
+              <Col span={6} ><Form.Item label="用电量负偏差外价格(元/千瓦时)" name={['quotation', 'negative_deviation_price']} ><Input  /></Form.Item></Col>
             </Row>
 
             <Row justify="space-between" gutter={16}>
               <Col span={6} ><Form.Item label="用电曲线超出正偏差比例(%)" name={['quotation', 'curve_positive_ratio']} ><Input /></Form.Item></Col>
-              <Col span={6} ><Form.Item label="用电曲线超出正偏差外价格(¥)" name={['quotation', 'curve_positive_price']} ><Input /></Form.Item></Col>
+              <Col span={6} ><Form.Item label="用电曲线超出正偏差外价格(元/千瓦时)" name={['quotation', 'curve_positive_price']} ><Input /></Form.Item></Col>
               <Col span={6} ><Form.Item label="用电曲线超出负偏差比例(%)" name={['quotation', 'curve_negative_ratio']} ><Input /></Form.Item></Col>
-              <Col span={6} ><Form.Item label="用电曲线负偏差外价格(¥)" name={['quotation', 'curve_negative_price']} ><Input  /></Form.Item></Col>
+              <Col span={6} ><Form.Item label="用电曲线负偏差外价格(元/千瓦时)" name={['quotation', 'curve_negative_price']} ><Input  /></Form.Item></Col>
             </Row>
 
             <Row justify="space-between" gutter={16}>

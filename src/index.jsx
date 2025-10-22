@@ -12,6 +12,8 @@ import ContractDetail from './pages/contractDetail/index';
 import SettlementCreate from './pages/settlementCreate/index'
 
 import ElectricPredictPrice from './pages/electricPredictPrice/index';
+import ElectricHistoryPrice from './pages/electricPrice/index';
+
 
 import Customer from './pages/customer/index';
 import CustomerDetail from './pages/customerDetail/index';
@@ -37,6 +39,9 @@ const router = createBrowserRouter(
 
 
         <Route path={routerName.electric.predictPrice} element={<ElectricPredictPrice />} />
+        <Route path={routerName.electric.historyPrice} element={<ElectricHistoryPrice />} />
+
+        
 
         <Route path={routerName.customer} element={<Customer />} />
         <Route path={`${routerName.customer}/:id`} element={<CustomerDetail />} />

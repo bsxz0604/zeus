@@ -1,68 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import { Line, Area } from '@ant-design/plots';
+import { useEffect, useState } from 'react';
+import { Area } from '@ant-design/plots';
 
-import { Col, Row, Input, Descriptions, Divider, DatePicker, Select, Form, Space, Button } from 'antd';
+import { Flex, Spin, Table, DatePicker, Select, Form, Button, Divider, message } from 'antd';
 
-import { mockInfo, areaMockInfo } from './mock';
+import { GetIntervalSummary, GetAllCompanies, ContractCSV } from '../../request'
+
+import dayjs from 'dayjs';
 
 import './index.css';
 
+const { Column } = Table;
+
+
 const ElectricPredictPrice = () => {
-
-
   const [form] = Form.useForm();
 
+  const [messageApi, contextHolder] = message.useMessage();
+
+
+  const [companyList, setCompanyList] = useState([]);
 
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
-
+  const [list, setList] = useState([]);
+  const [tableLoading, setTableLoading] = useState(false);
 
   useEffect(() => {
     asyncFetch();
-    asyncFetch1();
   }, []);
 
+
+  const getIntervalInfo = (company_name, date) => {
+    setTableLoading(true);
+    GetIntervalSummary(company_name, date, date).then(res => {
+      const value  = res.data.data.points.map(i => ({
+        timestamp: dayjs(i.timestamp).format('HH:mm'),
+        forecast_energy_KWh: i.forecast_energy_KWh,
+        type: '预测数据(kWh)'
+      }));
+      setData(value);
+      setList(value);
+    }).catch(() => {
+      messageApi.error('加载失败, 请刷新页面或者联系管理员');
+    }).finally(() => {
+      setTableLoading(false);
+    });
+  }
+
   const asyncFetch = () => {
-    new Promise(function(resolve, reject){ 
-      setTimeout(function(){ 
-          resolve(mockInfo);
-      }, 500);
-    }).then((json) => {
-      setData(json)
-    })
-    .catch((error) => {
-      console.log('fetch data failed', error);
+    GetAllCompanies().then((res) => {
+      setCompanyList(res.data.data);
+      form.setFieldsValue({
+        company_name: res.data.data[0],
+        date: dayjs(),
+      });
+      getIntervalInfo(res.data.data[0], dayjs().format('YYYY-MM-DD'));
+    }).catch(()=> {
+      messageApi.error('加载失败, 请刷新页面');
+    }).finally(() => {
     });
   };
 
-  const asyncFetch1 = () => {
-    new Promise(function(resolve, reject){ 
-      setTimeout(function(){ 
-          resolve(areaMockInfo);
-      }, 500);
-    }).then((json) => {
-      setData1(json)
+
+  const downloadCSV = () => {
+    let {company_name, date} = form.getFieldsValue();
+    ContractCSV(company_name, date, date ).then((resp) => {
+      const blobObj = new Blob([resp.data], { type: "text/csv" });
+      const downloadLink = document.createElement('a');
+      let url = window.URL || window.webkitURL || window.moxURL; // 浏览器兼容
+      url = url.createObjectURL(blobObj);
+      downloadLink.href = url;
+      downloadLink.download = `forecast_report_${company_name}_${date}.csv`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      window.URL.revokeObjectURL(url);
     })
-    .catch((error) => {
-      console.log('fetch data failed', error);
-    });
-  };
+  } 
+
+  
+
+  const onFormChange =(_info) => {
+    const {company_name, date} = form.getFieldsValue();
+    getIntervalInfo(company_name, date.format('YYYY-MM-DD'));
+  }
 
   const config = {
-    // title: {
-    //   title: '实时电价', // 主标题
-    //   titleFontSize: 20,
-    //   titleLineHeight: 40,
-
-    // },
     title: false,
     data,
-    xField: 'date',
-    yField: 'value',
+    xField: 'timestamp',
+    yField: 'forecast_energy_KWh',
     colorField: 'type',
+    shapeField: 'smooth',
     axis: {
       y: {
         labelFormatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
+    },
+    line: {
+      style: {
+        stroke: 'rgba(23,163,74,1)',
       },
     },
     legend: {
@@ -72,268 +108,69 @@ const ElectricPredictPrice = () => {
         layout: {
           justifyContent: 'center',
         },
-      },
-    },
-    scale: { color: { range: ['#30BF78', '#F4664A'] } },
-    style: {
-      lineWidth: 2,
-      lineDash: (data) => {
-        if (data[0].type === '预测价格') return [4, 4];
-      },
-      opacity: (data) => {
-        if (data[0].type !== '预测价格') return 0.5;
-      },
-    },
-  };
 
-  const config1 = {   
-    // title: {
-    //   title: '预测偏差', // 主标题
-    //   titleFontSize: 20,
-    //   titleLineHeight: 40,
-    // }, 
-    title: false,
-    data: data1,
-    xField: 'date',
-    yField: '预测电量',
-    // shapeField: 'smooth',
-
-    scale: {
-      y: {
-        type: "linear",
-        domain: [-0.06, 0.06],
-        tickMethod: ()=> [-0.06, -0.03, 0 , 0.03,  0.06],
-        // tickFilter: (_, i) => i % 3 !== 0, // 过滤 y 轴刻度线，只显示每隔 3 个刻度线
-        // tickMethod: (min, max, count, base) => {
-        //   // console.info('--------', min, max, count, base);
-        //   // // 计算对数范围
-        //   // const logMin = Math.log(min) / Math.log(base);
-        //   // const logMax = Math.log(max) / Math.log(base);
-        //   // // 计算对数步长
-        //   // const logStep = (logMax - logMin) / (count - 1);
-        //   // // 生成刻度数组
-
-        //   // console.info('=====', logMin, logMax, logStep);
-
-        //   // const ticks = [];
-        //   // for (let i = 0; i < count; i++) {
-        //   //   const logValue = logMin + i * logStep;
-        //   //   const value = Math.pow(base, logValue);
-        //   //   // 过滤超出范围的值
-        //   //   if (value >= min && value <= max) {
-        //   //     ticks.push(Math.round(value));
-        //   //   }
-        //   // }
-        //   // return ticks;
-        // },
-      }
-    },
-    tooltip: {
-      items: [{ channel: 'y', valueFormatter: '.2%' }],
-    },
-
-    axis: {
-      x: {
-        type: 'timeCat'
-      },
-      y: { 
-        title: false,
-        labelFormatter: (datum, index, array) => {
-          return `${datum * 100}%`;
-        }
-      },
-    },
-    interaction: {
-      tooltip: {
-        marker: false,
+        itemMarker: 'dash',
+        itemMarkerStroke: 'rgba(23,163,74,1)',
       },
     },
     style: {
-      fillOpacity: 0,
-      fill: 'linear-gradient(-90deg, white 0%, darkgreen 100%)',
-      lineWidth: 1,
+      fill: 'rgba(23,163,74,0.3)',
     },
-    line: {
-      style: {
-        opacity: 0.3,
-        stroke: 'darkgreen',
-        lineWidth: 1,
-      },
-    },
-    // point: {
-    //   sizeField: 4,
-    //   style: {
-    //     stroke: 'darkgreen',
-    //     fill: '#fff',
-    //   },
-    // },
   };
 
-
-
-  const items = [
-    {
-      key: '1',
-      label: '最大值',
-      children: '0.595 ¥/kWh',
-      span: 16,
-    },
-    {
-      key: '2',
-      label: '最小值',
-      children: '0.536 ¥/kWh',
-      span: 16,
-    },
-    {
-      key: '3',
-      label: '平均值',
-      children: '0.552 ¥/kWh',
-      span: 16,
-    },
-    // {
-    //   key: '4',
-    //   label: '中间值',
-    //   children: '0.547 ¥/kWh',
-    //   span: 16,
-    // },
-    // {
-    //   key: '5',
-    //   label: '标准差',
-    //   children: '-3.2%',
-    //   span: 16,
-    // },
-  ];
   return (
     <>
-    <div style={{ border: '1px dashed #333333', borderRadius: '10px', paddingBottom:'20px', marginBottom: 20}}>
+    {contextHolder}
+    <div style={{ paddingBottom:'20px', marginBottom: 20}}>
       <div style={{paddingBottom: 24, paddingTop: 20, display: 'flex', justifyContent: 'space-between'}}>
-        <span style={{fontSize:16, fontWeight: 700, paddingLeft: 15}}>实时电价</span>
-        <Form form={form} layout="inline">
-          <Form.Item name="area" label="地区">
-            <Input placeholder="地区" allowClear />
+        <span style={{fontSize:16, fontWeight: 700, paddingLeft: 15,lineHeight:'32px'}}>用电量预测</span>
+        <Form form={form} layout="inline" onValuesChange={onFormChange}>
+          <Form.Item name="company_name" label="企业名称" >
+            <Select placeholder="企业名称" style={{minWidth:300}}>
+              {
+                companyList.map((comp, _index) => {
+                  let show_name = comp;
+                  if(comp === "--全部--") {
+                    show_name = "全部";
+                  }
+                  return (
+                    <Select.Option value={comp}>{show_name}</Select.Option>
+                  )
+                })
+              }
+            </Select>          
           </Form.Item>
-          <Form.Item name="time" label="交易日">
-            <DatePicker onChange={()=>{}} />
-          </Form.Item>
-          <Form.Item name="electricType" label="电价类型">
-            <Input placeholder="实时电价" allowClear />
-          </Form.Item>
-          <Form.Item name="abc" label="显示范围">
-            <Select
-              defaultValue="6"
-              style={{ width: 120 }}
-              onChange={()=>{}}
-              options={[
-                { value: '4', label: '4小时' },
-                { value: '6', label: '6小时' },
-                { value: '8', label: '8小时' },
-                { value: '10', label: '10小时' },
-              ]}
-            />
-          </Form.Item>
-          <Form.Item name="dec" label="预测时长">
-            <Select
-              defaultValue="4"
-              style={{ width: 120 }}
-              onChange={()=>{}}
-              options={[
-                { value: '4', label: '4小时' },
-                { value: '6', label: '6小时' },
-                { value: '8', label: '8小时' },
-                { value: '10', label: '10小时' },
-              ]}
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Space><Button type="primary">搜索</Button></Space>
+          <Form.Item name="date" label="预测日期">
+            <DatePicker picker='day' onChange={()=>{}} />
           </Form.Item>
         </Form>
       </div>
-      <Line {...config} />
+      {tableLoading ? <Spin tip="Loading" size="large"></Spin> : <Area {...config}/>}
+      
 
      </div>
-     
-     {/* <Divider size='large' /> */}
 
-     <Row wrap={false} style={{maxWidth:'100%'}}>
-      <Col span={16} style={{ border: '1px dashed #333333', borderRadius: '10px', padding: 20 }}>
-        <div style={{paddingBottom: 24, display: 'flex', justifyContent: 'space-between'}}>
-          <span style={{fontSize:16, fontWeight: 700, paddingLeft: 15}}>预测电价</span>
-          <Form form={form} layout="inline">
-            <Form.Item name="abc" label="显示范围">
-              <Select
-                defaultValue="6"
-                style={{ width: 120 }}
-                onChange={()=>{}}
-                options={[
-                  { value: '4', label: '4小时' },
-                  { value: '6', label: '6小时' },
-                  { value: '8', label: '8小时' },
-                  { value: '10', label: '10小时' },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item name="dec" label="预测时长">
-              <Select
-                defaultValue="4"
-                style={{ width: 120 }}
-                onChange={()=>{}}
-                options={[
-                  { value: '4', label: '4小时' },
-                  { value: '6', label: '6小时' },
-                  { value: '8', label: '8小时' },
-                  { value: '10', label: '10小时' },
-                ]}
-              />
-            </Form.Item>
+    <Divider size='large' />
 
-            <Form.Item>
-              <Space><Button type="primary">搜索</Button></Space>
-            </Form.Item>
-          </Form>
-        </div>
-        <Area {...config1} />
-      </Col>
-      <Col span={8}  style={{ marginLeft:20, border: '1px dashed #333333', borderRadius: '10px', padding:20 }}>
-        <div style={{paddingBottom: 24, display: 'flex', justifyContent: 'space-between'}}>
-          <span style={{fontSize:16, fontWeight: 700, paddingLeft: 15}}>电价统计</span>
-          <Form form={form} layout="inline">
-            <Form.Item name="abc" label="统计范围">
-              <Select
-                defaultValue="6"
-                style={{ width: 120 }}
-                onChange={()=>{}}
-                options={[
-                  { value: '4', label: '4小时' },
-                  { value: '6', label: '6小时' },
-                  { value: '8', label: '8小时' },
-                  { value: '10', label: '10小时' },
-                ]}
-              />
-            </Form.Item>
-            <Form.Item>
-              <Space><Button type="primary">搜索</Button></Space>
-            </Form.Item>
-          </Form>
-        </div>
-        <div style={{padding:20,  marginTop:120,   textAlign: 'center'}}>
-          <Row justify="space-between" gutter={16}>
-            <Col span={6} className="text-a">最大值: </Col>
-            <Col span={18} className="text-a">0.595 ¥/kWh</Col>
-          </Row> 
-          <Row justify="space-between" gutter={16}>
-            <Col span={6} className="text-a">最小值: </Col>
-            <Col span={18} className="text-a">0.536 ¥/kWh</Col>
-          </Row>
-          <Row justify="space-between" gutter={16}>
-            <Col span={6} className="text-a">平均值: </Col>
-            <Col span={18} className="text-a" >0.552 ¥/kWh</Col>
-          </Row>
-        </div>
-      </Col>
-    </Row>
+     <div>
+      <Flex justify="space-between" style={{padding:'0 16px 0', margin:"20px 0 16px 0"}}>
+        <span span={6} style={{fontWeight:700, fontSize:16, lineHeight:'32px'}}>预测数据详情 </span>
+        <span span={18} ><Button color="cyan" variant="solid" onClick={downloadCSV}>下载csv</Button></span>
+      </Flex>
 
+      <Table 
+        dataSource={list}
+        scroll={{ y: 55 * 8 }}
+        sticky={{ offsetHeader: 64 }}
+        loading={tableLoading}
+        bordered
+        pagination={false}
+      >
+        <Column title="时间" dataIndex="timestamp" key="timestamp" fixed='left' width={300}/>
+        <Column title="预测用电量 (kWh)" dataIndex="forecast_energy_KWh" fixed='left'/>
+      </Table>
+
+     </div>
     </>
   );
 };

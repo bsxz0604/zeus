@@ -8,7 +8,8 @@ export const routerName = {
     },
     settlement: '/settlement',
     electric: {
-        predictPrice: 'electric-predic-price'
+        predictPrice: 'electric-predic-price',
+        historyPrice: 'electric-history-price'
     },
     customer: '/customer',
 }
@@ -47,17 +48,14 @@ export const routerName = {
 
 const priceItems = [
     {
-        key: `price-list`,
-        label: <Link to='/c'>电价管理</Link>,
+        key: routerName.electric.historyPrice,
+        label: <Link to={routerName.electric.historyPrice}>用电量展示</Link>,
     },
     {
         key: routerName.electric.predictPrice,
-        label: <Link to={routerName.electric.predictPrice} >月竞电价预测</Link>,
-    },
-    {
-        key: `price-used-electric`,
-        label: <Link to='/c'>月用电量预测</Link>,
+        label: <Link to={routerName.electric.predictPrice} >用电量预测</Link>,
     }
+
 ];
 
 

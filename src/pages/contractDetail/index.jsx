@@ -24,7 +24,6 @@ const ContractDetail = () => {
   
   const getInfo = () => {
     GetContractInfo(id).then((resp) => {
-      console.info('=======',resp.data.data);
       setInfo(resp.data.data);
     })
     .catch((error) => {

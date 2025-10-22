@@ -99,12 +99,8 @@ const ElectricHistoryPrice = () => {
 
   const onFormChange =(_info) => {
     const {company_name, start_date, end_date} = form.getFieldsValue();
-    console.info('-----',2)
     getDailyInfo(company_name, start_date.format('YYYY-MM-DD'), end_date.format('YYYY-MM-DD'));
-    console.info('-----',1)
     getIntervalInfo(company_name, start_date.format('YYYY-MM-DD'), end_date.format('YYYY-MM-DD'));
-        console.info('-----',3)
-
   }
 
   const config = {
@@ -114,6 +110,9 @@ const ElectricHistoryPrice = () => {
     yField: 'value',
     colorField: 'type',
     shapeField: 'smooth',
+    axis: {
+      y: { title: '用电量(kWh)' },
+    },
     legend: {
       color: {
         crossPadding: 30,

@@ -67,7 +67,6 @@ const ContractEditModal = (props) => {
     GetPartyAList().then((resp) => {
       setCustomerList(resp.data.data.party_a_list);
       GetContractInfo(props.id).then((resp) => {
-        console.info('-------', resp.data.data);
         // 合同基本信息
         form.setFieldsValue({
           party_a_contract_no: resp.data.data.contract_content.party_a_contract_no,
@@ -487,8 +486,6 @@ const ContractEditModal = (props) => {
       delete(req.additional_terms)
     }
     
-    console.info('==========111', req);
-
     EditContractInfo(props.id ,req).then(() => {
       props.messageApi.success("更新成功");
       props.reload();

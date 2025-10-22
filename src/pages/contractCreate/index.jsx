@@ -357,7 +357,7 @@ const ContractCreatedModal = (props) => {
       delete(req.additional_terms)
     }
     
-    console.info('==========111', req);
+    // console.info('==========111', req);
 
     CreateContract(req).then(() => {
       props.messageApi.success("创建成功");

@@ -31,6 +31,7 @@ const ElectricHistoryPrice = () => {
   }, []);
 
   const getDailyInfo = (company_name, date, date1) => {
+    setList([]);
     GetDailySummary(company_name, date, date1).then(res => {
       const value  = res.data.data.days.map(i => ({
         summary_date: i.summary_date,
@@ -46,6 +47,7 @@ const ElectricHistoryPrice = () => {
   }
 
   const getIntervalInfo = (company_name, date, date1) => {
+    setData([]);
     setTableLoading(true);
     GetIntervalSummary(company_name, date, date1).then(res => {
       let value = [];

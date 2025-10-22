@@ -30,6 +30,8 @@ const ElectricPredictPrice = () => {
 
 
   const getIntervalInfo = (company_name, date) => {
+    setData([]);
+    setList([]);
     setTableLoading(true);
     GetIntervalSummary(company_name, date, date).then(res => {
       const value  = res.data.data.points.map(i => ({

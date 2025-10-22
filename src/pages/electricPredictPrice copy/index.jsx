@@ -62,6 +62,7 @@ const ElectricPredictPrice = () => {
     colorField: 'type',
     axis: {
       y: {
+        title: '用电量(kWh)',
         labelFormatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
       },
     },

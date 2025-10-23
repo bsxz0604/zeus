@@ -76,6 +76,9 @@ const ElectricPredictPrice = () => {
       downloadLink.click();
       document.body.removeChild(downloadLink);
       window.URL.revokeObjectURL(url);
+    }).catch((code) => {
+      // console.info(code);
+      messageApi.error('下载失败');
     })
   } 
 

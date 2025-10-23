@@ -65,7 +65,7 @@ const ElectricPredictPrice = () => {
 
   const downloadCSV = () => {
     let {company_name, date} = form.getFieldsValue();
-    ContractCSV(company_name, date, date ).then((resp) => {
+    ContractCSV(company_name, date.format('YYYY-MM-DD'), date.format('YYYY-MM-DD') ).then((resp) => {
       const blobObj = new Blob([resp.data], { type: "text/csv" });
       const downloadLink = document.createElement('a');
       let url = window.URL || window.webkitURL || window.moxURL; // 浏览器兼容

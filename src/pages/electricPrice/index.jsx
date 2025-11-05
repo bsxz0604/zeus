@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Line } from '@ant-design/plots';
 
-import { Flex, Spin, Table, DatePicker, Select, Form, Button, Divider, Upload, message, notification } from 'antd';
+import { Flex, Spin, Table, DatePicker, Select, Form, Button, Divider, message, notification } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-import { GetDailySummary, GetIntervalSummary, GetAllCompanies, baseURL } from '../../request'
+import { GetDailySummary, GetIntervalSummary, GetAllCompanies, baseURL, GetTaskStatusByComp } from '../../request'
 
 import dayjs from 'dayjs';
 
@@ -15,6 +15,7 @@ const { Column } = Table;
 
 
 const ElectricHistoryPrice = () => {
+  const myRef = useRef(null);
   const [form] = Form.useForm();
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -25,6 +26,8 @@ const ElectricHistoryPrice = () => {
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
   const [tableLoading, setTableLoading] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
+  const [text, setText] = useState('');
 
   useEffect(() => {
     asyncFetch();
@@ -90,7 +93,7 @@ const ElectricHistoryPrice = () => {
       });
       getDailyInfo(res.data.data[0], dayjs().format('YYYY-MM-DD'), dayjs().format('YYYY-MM-DD'));
       getIntervalInfo(res.data.data[0], dayjs().format('YYYY-MM-DD'), dayjs().format('YYYY-MM-DD'));
-
+      getTaskStatusByUser();
     }).catch(()=> {
       messageApi.error('加载失败, 请刷新页面');
     }).finally(() => {
@@ -101,6 +104,7 @@ const ElectricHistoryPrice = () => {
 
   const onFormChange =(_info) => {
     const {company_name, start_date, end_date} = form.getFieldsValue();
+    getTaskStatusByUser();
     getDailyInfo(company_name, start_date.format('YYYY-MM-DD'), end_date.format('YYYY-MM-DD'));
     getIntervalInfo(company_name, start_date.format('YYYY-MM-DD'), end_date.format('YYYY-MM-DD'));
   }
@@ -130,26 +134,70 @@ const ElectricHistoryPrice = () => {
     },
   };
 
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
 
-  const uploadProps = {
-    name: 'file',
-    action: `${baseURL}/api/v1/power-consumption/upload`,
-    fileList:[],
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
+    fetch(`${baseURL}/api/v1/power-consumption/tasks/execute`, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(data => {
+      notificationApi.info({
+        message: '上传文件',
+        description: <div style={{whiteSpace: 'pre-line'}}>{data.upload_report || ''}</div>,
+      });
+      getTaskStatusByUser();
+      console.log('====', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+  } 
+
+  const uploadFiles = () => {
+    if (myRef.current) {
+      // 操作DOM元素
+      myRef.current.click();
+    }
+  }
+
+  const getTaskStatusByUser = () => {
+    if(inProgress) {
+      return;
+    } else {
+      requestTask();
+    }
+  }
+
+  const requestTask = () => {
+    const {company_name} = form.getFieldsValue();
+    GetTaskStatusByComp(company_name).then(res => {
+      setInProgress(res.data.data.in_progress);
+
+      if(res.data.data.in_progress) {
+        let tx = '';
+        res.data.data.jobs.map(i => {
+          if(i.status !== 'success') {
+            tx = tx + i.predicted_date + '、';
+          }
+        })
+        if(tx.length > 0) {
+          setText(tx.substring(0, tx.length - 1));
+        }
+        setTimeout(()=>{requestTask();},10000);
       }
-      if (info.file.status === 'done') {
-        messageApi.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        messageApi.error(`${info.file.name} file upload failed.`);
+    }).catch(error => {
+      if(inProgress) {
+        setTimeout(()=>{requestTask();},10000);
       }
-      console.info('kkkk', info);
-    },
-  };
+    })
+
+  }
 
   return (
     <>
@@ -181,16 +229,17 @@ const ElectricHistoryPrice = () => {
             <DatePicker picker='day' onChange={()=>{}} />
           </Form.Item>
         </Form>
-
         <span>
-          <Upload {...uploadProps}>
-            <Button icon={<UploadOutlined />}>上传数据</Button>
-          </Upload>
+          <input style={{display: 'none'}} ref={myRef} type="file"className='uploadBtn' multiple onChange={handleFileChange} />
+          <Button color="cyan" variant="solid" icon={<UploadOutlined />} onClick={uploadFiles}>上传数据</Button>
         </span>
       </div>
       {tableLoading ? <Spin tip="Loading" size="large"></Spin> : <Line {...config}/>}
-      
-
+      <div className='gradient-container'>
+        {inProgress ?  <p className='gradient'>AI正在更新{text}的预测结果中..</p>: null}
+      </div>
+     
+     
      </div>
 
     <Divider size='large' />

@@ -76,8 +76,14 @@ const ElectricPredictPrice = () => {
       downloadLink.click();
       document.body.removeChild(downloadLink);
       window.URL.revokeObjectURL(url);
-    }).catch((code) => {
-      // console.info(code);
+    }).catch((code, ...res) => {
+      // console.info(code, code.response.data);
+      // const file = new FileReader();
+      // file.readAsText(code.response.data, 'utf-8');
+      // file.onload=function() {
+      //   const message = JSON.parse(file.result);
+      //   console.info('=====', message);
+      // }
       messageApi.error('下载失败');
     })
   } 

@@ -86,6 +86,12 @@ export function GetAllCompanies() {
     return service.get(`/api/v1/power-consumption/companies`)
 }
 
+export function GetTaskStatusByComp (company_name) {
+    return service.get(`/api/v1/power-consumption/jobs/${company_name}`)
+
+    
+}
+
 
 
 

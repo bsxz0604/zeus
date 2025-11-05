@@ -66,3 +66,19 @@
     font-size: 16px;
     line-height: 50px;
   }
+
+.gradient-container {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center;    /* 垂直居中 */
+  width: 100%; /* 容器高度设为视口高度 */
+}
+
+.gradient {
+  text-align: center;
+  font-weight: bold;
+  background: -webkit-linear-gradient(left, #39d353, #ff6b00);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
